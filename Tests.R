@@ -6,13 +6,13 @@
 # t1 refers to the generation used as earliest sample in TBI()
 # t2 refers to the generation used as latest sample in TBI()
 
-rep_num <- 3 #length(list.files(getwd()))
+rep_num <- 10 #length(list.files(getwd()))
+earliest <- 190 #150 is the lowest possible
 iter <- 50
 
-###########################################################################################
-###########################################################################################
-##### DOES IT IDENTIFY POSITIVE WHEN IT SHOULD NOT? - WITH ONE STEP CRITERION
-##### random pairs of generations between 150 and 200
+
+#### DOES IT IDENTIFY POSITIVE WHEN IT SHOULD NOT? - WITH ONE STEP CRITERION ####
+#### random pairs of generations between "earliest" and 200
 
 # permute method 1
 COUNTS1 <- numeric(rep_num)
@@ -20,7 +20,7 @@ pro <- txtProgressBar()
 for (i in 0:(rep_num-1)) {
   count <- 0
   for (j in 1:iter){
-   rpair <- sort(sample(150:200, 2, replace=FALSE))
+   rpair <- sort(sample(earliest:200, 2, replace=FALSE))
     test <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, rpair[2]), method="chord", n=1000)
     if (sum(test$p.adj < 0.025) > 0) {
       count <- count + 1
@@ -30,7 +30,7 @@ for (i in 0:(rep_num-1)) {
   setTxtProgressBar(pro,i)
 }
 mean(COUNTS1)/iter*100
-# RESULT: 30% AT 0.025, ABOUT 10 TIMES THE ACCEPTABLE RATE?
+# RESULT: 28% AT 2.5%
 
 # permute method 2
 COUNTS2 <- numeric(rep_num)
@@ -38,7 +38,7 @@ pro <- txtProgressBar()
 for (i in 0:(rep_num-1)) {
   count <- 0
   for (j in 1:iter){
-    rpair <- sort(sample(150:200, 2, replace=FALSE))
+    rpair <- sort(sample(earliest:200, 2, replace=FALSE))
     test <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, rpair[2]), method="chord", n=1000,
                 permute.sp = 2)
     if (sum(test$p.adj < 0.025) > 0) {
@@ -49,7 +49,7 @@ for (i in 0:(rep_num-1)) {
   setTxtProgressBar(pro,i)
 }
 mean(COUNTS2)/iter*100
-# RESULT: 17% AT 0.025, ABOUT 10 TIMES THE ACCEPTABLE RATE?
+# RESULT: 10% AT 2.5%
 
 # permute method 3
 COUNTS3 <- numeric(rep_num)
@@ -57,7 +57,7 @@ pro <- txtProgressBar()
 for (i in 0:(rep_num-1)) {
   count <- 0
   for (j in 1:iter){
-    rpair <- sort(sample(150:200, 2, replace=FALSE))
+    rpair <- sort(sample(earliest:200, 2, replace=FALSE))
     test <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, rpair[2]), method="chord", n=1000,
                 permute.sp = 3)
     if (sum(test$p.adj < 0.025) > 0) {
@@ -68,15 +68,44 @@ for (i in 0:(rep_num-1)) {
   setTxtProgressBar(pro,i)
 }
 mean(COUNTS3)/iter*100
-# RESULT: 1% AT 0.025, ABOUT 10 TIMES THE ACCEPTABLE RATE?
+# RESULT: 1% AT 2.5%
 
-###########################################################################################
-###########################################################################################
-#####  DOES IT IDENTIFY POSITIVE WHEN IT SHOULD? - WITH TWO STEP CRITERION
+####  DOES IT IDENTIFY POSITIVE WHEN IT SHOULD? - WITH ONE STEP CRITERION ####
 
-##### TEST 1
-##### first step: random t1 generation between 180 and 200, t2= 201
-##### second step: intersection of results with those of t1+1; t2
+##### TEST 1  ####
+#### first step: t1all generation between 180 and 200, t2= 201
+#### second step: intersection of results with those of t1+1; t2
+
+# permute method 1
+POS <- vector("list", length = rep_num)
+pro <- txtProgressBar(max=rep_num)
+for (i in 0:(rep_num-1)) {
+  pos <- vector("list", length = 21)
+  for (j in (earliest-150):50){
+    rpair <- c(150+j,201)
+    test <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, rpair[2]), method="chord", n=1000,
+                permute.sp = 1)
+    pop <- which(test$p.adj < 0.025)
+    pos[[j-(earliest-150)+1]] <- pop
+  }
+  POS[[i+1]] <- pos
+  setTxtProgressBar(pro,i+1)
+}
+POS
+
+unlist(POS[1])
+!13%in%c(unlist(POS[1]))
+c(unlist(POS[1]))%in%!c(13)
+!c(unlist(POS[1]))%in%c(13)
+sum(!c(unlist(POS[1]))%in%c(13))
+sum(!c(unlist(POS[1]))%in%c(13))/length(c(unlist(POS[1])))
+
+unlist(POS[2])
+
+unlist(POS[3])
+
+
+# RESULT: 1% AT 0.025
 
 # permute method 1
 POS <- vector("list", length = rep_num)
@@ -100,51 +129,29 @@ for (i in 0:(rep_num-1)) {
 }
 POS
 
-
-
 # permute method 2
 POS <- vector("list", length = rep_num)
+pro <- txtProgressBar()
 for (i in 0:(rep_num-1)) {
-  
-  pos <- vector("list", length = 51)
-  for (j in 0:50){
+  pos <- vector("list", length = 21)
+  for (j in 30:50){
     rpair <- c(150+j,201)
     
     test <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, rpair[2]), method="chord", n=1000,
                 permute.sp = 2)
     pop <- which(test$p.adj < 0.025)
-    time2bis <- rpair[2] + 1
-    test_plus1 <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, time2bis), method="chord", n=1000,
+    time1bis <- rpair[1]+1
+    test_plus1 <- TBI(CD2TBI(i, time1bis), CD2TBI(i, rpair[2]), method="chord", n=1000,
                       permute.sp = 2)
     pop1 <- which(test_plus1$p.adj < 0.025)
     pos[[j+1]] <- ifelse(length(intersect(pop,pop1))>0, intersect(pop,pop1), NA)
   }
-  
   POS[[i+1]] <- pos
+  setTxtProgressBar(pro,i)
 }
 POS
 
-# permute method 3
-POS <- vector("list", length = rep_num)
-for (i in 0:(rep_num-1)) {
-  
-  pos <- vector("list", length = 51)
-  for (j in 0:50){
-    rpair <- c(150+j,201)
-    
-    test <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, rpair[2]), method="chord", n=1000,
-                permute.sp = 3)
-    pop <- which(test$p.adj < 0.025)
-    time2bis <- rpair[2] + 1
-    test_plus1 <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, time2bis), method="chord", n=1000,
-                      permute.sp = 3)
-    pop1 <- which(test_plus1$p.adj < 0.025)
-    pos[[j+1]] <- ifelse(length(intersect(pop,pop1))>0, intersect(pop,pop1), NA)
-  }
-  
-  POS[[i+1]] <- pos
-}
-POS
+
 
 ###########################################################################################
 ###########################################################################################
