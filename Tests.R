@@ -1,15 +1,23 @@
 # False positive and true positive rates MIGRATION EVENT
 # Julian Wittische 
-# October 2018
+# February 2019
 
 # The event affects the 201th generation.
-# t1 refers to the generation used as earliest sample in TBI()
-# t2 refers to the generation used as latest sample in TBI()
+# "t1" refers to the generation used as earliest sample in TBI()
+# "t2" refers to the generation used as latest sample in TBI()
 
-rep_num <- 10 #length(list.files(getwd()))
-earliest <- 190 #150 is the lowest possible
-iter <- 50
+# "rep_num" refers to the number of simulation replicates to be used
+rep_num <- 10 # use length(list.files(getwd())) if you want all replicates
 
+# "earliest" refers to the number of simulation
+earliest <- 190 # 150 is the lowest possible
+
+
+# "com" enumerates the possible combinations
+com <- permutations(n=201-earliest,r=2,v=earliest:201,repeats.allowed=F)
+
+# "iter" refers to the number of pairs of times
+iter <- 10 # use nrow(com) if you want to use or know the maximum
 
 #### DOES IT IDENTIFY POSITIVE WHEN IT SHOULD NOT? - WITH ONE STEP CRITERION ####
 #### random pairs of generations between "earliest" and 200
@@ -77,7 +85,7 @@ mean(COUNTS3)/iter*100
 #### second step: intersection of results with those of t1+1; t2
 
 # permute method 1
-POS <- vector("list", length = rep_num)
+POS1 <- vector("list", length = rep_num)
 pro <- txtProgressBar(max=rep_num)
 for (i in 0:(rep_num-1)) {
   pos <- vector("list", length = 21)
@@ -88,21 +96,21 @@ for (i in 0:(rep_num-1)) {
     pop <- which(test$p.adj < 0.025)
     pos[[j-(earliest-150)+1]] <- pop
   }
-  POS[[i+1]] <- pos
+  POS1[[i+1]] <- pos
   setTxtProgressBar(pro,i+1)
 }
-POS
+POS1
 
-unlist(POS[1])
-!13%in%c(unlist(POS[1]))
-c(unlist(POS[1]))%in%!c(13)
-!c(unlist(POS[1]))%in%c(13)
-sum(!c(unlist(POS[1]))%in%c(13))
-sum(!c(unlist(POS[1]))%in%c(13))/length(c(unlist(POS[1])))
+unlist(POS1[1])
+!13%in%c(unlist(POS1[1]))
+c(unlist(POS1[1]))%in%!c(13)
+!c(unlist(POS1[1]))%in%c(13)
+sum(!c(unlist(POS1[1]))%in%c(13))
+sum(!c(unlist(POS1[1]))%in%c(13))/length(c(unlist(POS1[1])))
 
-unlist(POS[2])
+unlist(POS1[2])
 
-unlist(POS[3])
+unlist(POS1[3])
 
 
 # RESULT: 1% AT 0.025
