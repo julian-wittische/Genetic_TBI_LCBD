@@ -2,9 +2,6 @@
 # Julian Wittische 
 # February 2019
 
-# Scripts directory
-setwd("/home/labo_james/Desktop/Projects.GitHub/Genetic_TBI_LCBD")
-
 # Source script to install and load necessary packages
 source("Installing_missing_packages.R")
 
@@ -15,4 +12,7 @@ source("TBI.R")
 source("CD2TBI.R")
 
 # Data directory (smaller sample for now)
-setwd(paste0(getwd(),"/Test10"))
+setwd('..')
+setwd(paste0(getwd(),"/TBI_simulation"))
+setwd(paste0(getwd(),"/simulation_bottelneck"))
+setwd(paste0(getwd(),"/1000replicats1535732106"))
