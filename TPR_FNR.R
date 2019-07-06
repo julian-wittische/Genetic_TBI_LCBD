@@ -1,355 +1,132 @@
-# False positive and true positive rates - Bottleneck
+# False positive and true positive rates
 # Julian Wittische 
 # July 2019
 
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
-# The event affects the 201th generation.
-# "t1" refers to the generation used as earliest sample in TBI()
-# "t2" refers to the generation used as latest sample in TBI()
+TP <- function(pos_object) sapply(pos_object, function(x) sum(c(unlist(x))%in%c(13))) 
 
-# "rep_num" refers to the number of simulation replicates to be used
-rep_num <- 130 # use length(list.files(getwd())) if you want all replicates
+FP <- function(pos_object) sapply(pos_object, function(x) sum(c(unlist(x))%!in%c(13))) 
 
-# "earliest" refers to the number of simulation
-earliest <- 200 # 150 is the lowest possible
-time <- 201-earliest
-print(paste("Testing detection after", time, "year(s)/generation(s)"))
+FN <- function(pos_object) sapply(pos_object, function(x) sum(c(13)%!in%c(unlist(x)))) 
 
-####  TPR: DOES IT IDENTIFY POSITIVE WHEN IT SHOULD? - WITH ONE STEP CRITERION ####
+TN <- function(pos_object) 24 - FP(pos_object)
 
-##### TEST 1  ####
-#### first step: t1all generation between 180 and 200, t2= 201
-#### second step: intersection of results with those of t1+1; t2
+TP_FP_check <- function(pos_object) sapply(pos_object, length) - FP(pos_object) - TP(pos_object)
 
-# permute method 1
-
-pro <- txtProgressBar(max=rep_num, style=3)
-pos <- vector("list", length = rep_num)
-for (i in 0:(rep_num-1)) {
-  test <- TBI(CD2TBI(i, earliest), CD2TBI(i, 201), method="chord", n=1000, permute.sp = 1)
-  pop <- which(test$p.adj < 0.025)
-  pos[[i+1]] <- pop
-  setTxtProgressBar(pro,i+1)
+confusion_mat <- function(pos_object) {
+  data.frame(TP=TP(pos_object), FP=FP(pos_object), FN=FN(pos_object), TN=TN(pos_object),
+                            total=TP(pos_object)+FP(pos_object)+FN(pos_object)+TN(pos_object),
+                            TPR= TP(pos_object) / (TP(pos_object) + FN(pos_object)),
+                            FNR= 1 - (TP(pos_object) / (TP(pos_object) + FN(pos_object))),
+                            FPR= FP(pos_object) / (FP(pos_object) + TN(pos_object)),
+                            TNR= 1 - (FP(pos_object) / (FP(pos_object) + TN(pos_object))),
+                            ACC= (TP(pos_object)+TN(pos_object))/(TP(pos_object)+FP(pos_object)+FN(pos_object)+TN(pos_object)),
+                            PPV= TP(pos_object)/(TP(pos_object)+FP(pos_object)),
+                            FDR= FP(pos_object)/(TP(pos_object)+FP(pos_object)),
+                            FOR= FN(pos_object)/(FN(pos_object)+TN(pos_object)),
+                            NPV= TN(pos_object)/(FN(pos_object)+TN(pos_object)))
 }
 
-TP <- function(pos_object){
-  sapply(pos_object, function(x) sum(c(unlist(x))%in%c(13))) 
-}
-
-FP <- function(pos_object){
-  sapply(pos_object, function(x) sum(c(unlist(x))%!in%c(13))) 
-}
-FN <- function(pos_object){
-  sapply(pos_object, function(x) sum(c(13)%!in%c(unlist(x)))) 
-}
-TN <- function(pos_object){
-  24- FP(pos_object)
-}
-TN(pos)
-TP_FP_check <- function(pos_object){
-  sapply(pos_object, length) - FP(pos_object) - TP(pos_object)
-}
-
+# CHECK STEP: should be all zeros
 TP_FP_check(pos)
- 
-confusion_mat <- data.frame(TP=TP(pos), FP=FP(pos), FN=FN(pos), TN=TN(pos),
-                            total=TP(pos)+FP(pos)+FN(pos)+TN(pos),
-                            TPR= TP(pos) / (TP(pos) + FN(pos)),
-                            FNR= 1 - (TP(pos) / (TP(pos) + FN(pos))),
-                            FPR= FP(pos) / (FP(pos) + TN(pos)),
-                            TNR= 1 - (FP(pos) / (FP(pos) + TN(pos))))
-    
 
-confusion_mat
-pos
+###########################################################################################################
 
-FNR <- 1- TPR
-unlist(pos[1])
-!13%in%c(unlist(pos[1]))
-c(unlist(pos[1]))%in%!c(13)
-!c(unlist(pos[1]))%in%c(13)
+mean(confusion_mat(POS[[1]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[1]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[1]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[1]])$FNR, na.rm = TRUE)
 
-sum(!c(unlist(pos[1]))%in%c(13))
-sum(!c(13)%in%c(unlist(pos[1])))
+mean(confusion_mat(POS[[2]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[2]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[2]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[2]])$FNR, na.rm = TRUE)
 
-sum(!c(unlist(pos[1]))%in%c(13))/length(c(unlist(pos[1])))
+mean(confusion_mat(POS[[3]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[3]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[3]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[3]])$FNR, na.rm = TRUE)
 
-unlist(POS1[2])
+mean(confusion_mat(POS[[4]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[4]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[4]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[4]])$FNR, na.rm = TRUE)
 
-unlist(POS1[3])
+mean(confusion_mat(POS[[5]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[5]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[5]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[5]])$FNR, na.rm = TRUE)
 
+mean(confusion_mat(POS[[6]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[6]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[6]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[6]])$FNR, na.rm = TRUE)
 
+mean(confusion_mat(POS[[7]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[7]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[7]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[7]])$FNR, na.rm = TRUE)
 
+mean(confusion_mat(POS[[8]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[8]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[8]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[8]])$FNR, na.rm = TRUE)
 
+mean(confusion_mat(POS[[9]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[9]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[9]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[9]])$FNR, na.rm = TRUE)
 
-# RESULT: 1% AT 0.025
+mean(confusion_mat(POS[[10]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[10]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[10]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[10]])$FNR, na.rm = TRUE)
 
-# permute method 1
-POS <- vector("list", length = rep_num)
-pro <- txtProgressBar()
-for (i in 0:(rep_num-1)) {
-  pos <- vector("list", length = 21)
-  for (j in 30:50){
-    rpair <- c(150+j,201)
-    
-    test <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, rpair[2]), method="chord", n=1000,
-                permute.sp = 1)
-    pop <- which(test$p.adj < 0.025)
-    time1bis <- rpair[1]+1
-    test_plus1 <- TBI(CD2TBI(i, time1bis), CD2TBI(i, rpair[2]), method="chord", n=1000,
-                      permute.sp = 1)
-    pop1 <- which(test_plus1$p.adj < 0.025)
-    pos[[j+1]] <- ifelse(length(intersect(pop,pop1))>0, intersect(pop,pop1), NA)
-  }
-  POS[[i+1]] <- pos
-  setTxtProgressBar(pro,i)
-}
-POS
+mean(confusion_mat(POS[[11]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[11]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[11]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[11]])$FNR, na.rm = TRUE)
 
-# permute method 2
-POS <- vector("list", length = rep_num)
-pro <- txtProgressBar()
-for (i in 0:(rep_num-1)) {
-  pos <- vector("list", length = 21)
-  for (j in 30:50){
-    rpair <- c(150+j,201)
-    
-    test <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, rpair[2]), method="chord", n=1000,
-                permute.sp = 2)
-    pop <- which(test$p.adj < 0.025)
-    time1bis <- rpair[1]+1
-    test_plus1 <- TBI(CD2TBI(i, time1bis), CD2TBI(i, rpair[2]), method="chord", n=1000,
-                      permute.sp = 2)
-    pop1 <- which(test_plus1$p.adj < 0.025)
-    pos[[j+1]] <- ifelse(length(intersect(pop,pop1))>0, intersect(pop,pop1), NA)
-  }
-  POS[[i+1]] <- pos
-  setTxtProgressBar(pro,i)
-}
-POS
+mean(confusion_mat(POS[[12]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[12]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[12]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[12]])$FNR, na.rm = TRUE)
 
+mean(confusion_mat(POS[[13]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[13]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[13]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[13]])$FNR, na.rm = TRUE)
 
+mean(confusion_mat(POS[[15]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[15]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[15]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[15]])$FNR, na.rm = TRUE)
 
-###########################################################################################
-###########################################################################################
-##### DOES IT IDENTIFY POSITIVE WHEN IT SHOULD NOT? - WITH TWO STEP CRITERION: random pairs between 150 and 200
-##### random pairs of generations between 150 and 200
+mean(confusion_mat(POS[[16]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[16]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[16]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[16]])$FNR, na.rm = TRUE)
 
-COUNTS <- numeric(rep_num)
-for (i in 0:(rep_num-1)) {
-  count <- 0
-  for (j in 1:iter){
-    rpair <- sort(sample(150:200, 2, replace=FALSE))
-    test <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, rpair[2]), method="chord", n=1000)
-    if (sum(test$p.adj < 0.025) > 0) {
-      time2bis <- rpair[2] + 1
-      test_plus1 <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, time2bis), method="chord", n=1000)
-      pop1 <- which(test_plus1$p.adj < 0.025)
-      if (sum(pop==pop1)>0) {
-        count <- count + 1
-      }
-    }
-  }
-  COUNTS[i+1] <- count
-}
-mean(COUNTS)/iter*100
-# RESULT: 0% AT 0.025
+mean(confusion_mat(POS[[17]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[17]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[17]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[17]])$FNR, na.rm = TRUE)
 
-############################################################################################
-#####  DOES IT IDENTIFY POSITIVE WHEN IT SHOULD? - WITH TWO STEP CRITERION
-##### random generation between 150 and 200, and 201
+mean(confusion_mat(POS[[18]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[18]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[18]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[18]])$FNR, na.rm = TRUE)
 
-POS <- vector("list", length = rep_num)
-for (i in 0:(rep_num-1)) {
-  pos <- vector("list", length = iter)
-  for (j in 0:50){
-    rpair <- c(150+j,201)
-    test <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, rpair[2]), method="chord", n=1000)
-    if (sum(test$p.adj < 0.025) > 0) {
-      pop <- which(test$p.adj < 0.025)
-      time2bis <- rpair[2] + 1
-      test_plus1 <- TBI(CD2TBI(i, rpair[1]), CD2TBI(i, time2bis), method="chord", n=1000)
-      pop1 <- which(test_plus1$p.adj < 0.025)
-      pos[[j]] <- ifelse(length(intersect(pop,pop1))>0, intersect(pop,pop1), NA)
-    }
-  }
-  POS[[i+1]] <- pos
-}
-POS
+mean(confusion_mat(POS[[19]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[19]])$FPR, na.rm = TRUE)
+mean(confusion_mat(POS[[19]])$FNR, na.rm = TRUE)
+sd(confusion_mat(POS[[19]])$FNR, na.rm = TRUE)
 
-###########################################################################################
-POS <- vector("list", length = rep_num)
-TIME <- vector("list", length = rep_num)
-TP <- vector("list", length = rep_num)
-for (i in 0:(rep_num-1)) {
-  pos <- NULL
-  time <- NULL
-  for (j in 1:iter){
-    rpair <- c(sample(150:200, 1, replace=FALSE),201)
-    test <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, rpair[2]), method="chord", n=1000)
-    if (sum(test$p.adj < 0.025) > 0) {
-      pop <- which(test$p.adj < 0.025)
-      time2bis <- rpair[2] + 1
-      test_plus1 <- TBI(CD2TBI(rep, rpair[1]-1), CD2TBI(rep, rpair[2]), method="chord", n=1000)
-      pop1 <- which(test_plus1$p.adj < 0.025)
-      if (sum(pop==pop1)>0) {
-        pos <- c(pos,pop)
-        time <- c(time, paste0(rpair[1],rpair[2]))
-      }
-    }
-  }
-  POS[i+1] <- pop
-  TIME[i+1] <- time
-}
-POS
-TIME
+mean(confusion_mat(POS[[9]])$FDR, na.rm = TRUE)
+sd(confusion_mat(POS[[9]])$FDR, na.rm = TRUE)
 
-POS <- vector("list", length = rep_num)
-TIME <- vector("list", length = rep_num)
-TP <- vector("list", length = rep_num)
-for (i in 0:(rep_num-1)) {
-  pos <- NULL
-  time <- NULL
-  for (j in 1:iter){
-    rpair <- c(sample(150:200, 1, replace=FALSE),201)
-    test <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, rpair[2]), method="chord", n=1000)
-    if (sum(test$p.adj < 0.025) > 0) {
-      pop <- which(test$p.adj < 0.025)
-      time2bis <- rpair[2] + 1
-      test_plus1 <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, time2bis), method="chord", n=1000)
-      pop1 <- which(test_plus1$p.adj < 0.025)
-      if (sum(pop%in%pop1)>0) {
-        pos <- c(pos,pop)
-        time <- c(time, paste0(rpair[1],rpair[2]))
-      }
-    }
-  }
-  POS[i+1] <- pop
-  TIME[i+1] <- time
-}
-POS
-TIME
-
-###########################################################################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-POS <- vector("list", length = rep_num)
-TIME <- vector("list", length = rep_num)
-TP <- vector("list", length = rep_num)
-for (i in 0:(rep_num-1)) {
-  pos <- NULL
-  time <- NULL
-  for (j in 1:iter){
-    rpair <- c(sample(150:200, 1, replace=FALSE), 201)
-    test <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, rpair[2]), method="chord", n=1000)
-    if (sum(test$p.adj < 0.025) > 0) {
-      pop <- which(test$p.adj < 0.025)
-      time2bis <- rpair[2] + 1
-      test_plus1 <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, time2bis), method="chord", n=1000)
-      pop1 <- which(test_plus1$p.adj < 0.025)
-      if (sum(pop==pop1)>0) {
-        pos <- c(pos,pop)
-        time <- c(time, rpair[2])
-      }
-    }
-  }
-  POS[i] <- pop
-  TIME[i] <- time
-}
-POS
-TIME
-
-
-POS <- vector("list", length = rep_num)
-TIME <- vector("list", length = rep_num)
-TP <- vector("list", length = rep_num)
-for (i in 0:(rep_num-1)) {
-  pos <- NULL
-  time <- NULL
-  for (j in 1:iter){
-    rpair <- sort(sample(150:201, 2, replace=FALSE))
-    test <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, rpair[2]), method="chord", n=1000)
-    if (sum(test$p.adj < 0.025) > 0) {
-      pop <- which(test$p.adj < 0.025)
-      time2bis <- rpair[2] + 1
-      test_plus1 <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, time2bis), method="chord", n=1000)
-      pop1 <- which(test_plus1$p.adj < 0.025)
-      if (sum(pop==pop1)>0) {
-        pos <- c(pos,pop)
-        time <- c(time, rpair[2])
-      }
-    }
-  }
-  POS[i] <- pop
-  TIME[i] <- time
-}
-POS
-TIME
-
-###########################################################################################
-###########################################################################################
-###########################################################################################
-###########################################################################################
-
-POS <- NULL
-TIME <- NULL
-for (i in 1:iter){
-  rpair <- sort(sample(198:201, 2, replace=FALSE))
-  test <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, rpair[2]), method="chord", n=1000)
-  test$p.adj
-  
-  if (sum(test$p.adj < 0.025) > 0) {
-    pop <- which(test$p.adj < 0.025)
-    time2bis <- rpair[2] + 1
-    test_plus1 <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, time2bis), method="chord", n=1000)
-    pop1 <- which(test_plus1$p.adj < 0.025)
-    if (sum(pop==pop1)>0) {
-      POS <- unique(c(POS,pop))
-      TIME <- unique(c(TIME, rpair[2]))
-    }
-  }
-}
-POS
-TIME
-
-### Across reps
-COUNTS <- NULL
-for (i in 0:9) { #eventually 999
-  count <- 0
-  iter <- 500
-  for (i in 1:iter){
-    rpair <- sort(sample(150:201, 2, replace=FALSE))
-    test <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, rpair[2]), method="chord", n=1000)
-    if (sum(test$p.adj < 0.025) > 0) {
-      pop <- which(test$p.adj < 0.025)
-      time2bis <- rpair[2] + 1
-      test_plus1 <- TBI(CD2TBI(rep, rpair[1]), CD2TBI(rep, time2bis), method="chord", n=1000)
-      pop1 <- which(test_plus1$p.adj < 0.025)
-      if (sum(pop==pop1)>0) {
-        POS <- unique(c(POS,pop))
-        TIME <- unique(c(TIME, rpair[2]))
-      }
-    }
-    count <- count + 1
-  }
-}
-COUNTS <- c(COUNTS, count)
-} 
-# 30% FALSE POSITIVE
-start_time = Sys.time()
-end_time = Sys.time()
-end_time - start_time
+mean(confusion_mat(POS[[5]])$FPR, na.rm = TRUE)
+sd(confusion_mat(POS[[5]])$FPR, na.rm = TRUE)
+###########################################################################################################
+POS[[15]] <- pos
