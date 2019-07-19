@@ -1,6 +1,6 @@
 # Function to create input for TBI() from CDMetaPOP outputs
 # Julian Wittische
-# October 2018
+# July 2019
 
 # NOTES: 
 
@@ -8,10 +8,9 @@
 # scenario of interest 
 
 # Replicate IDs start with 0
+# scenario 0 is bottleneck, scenario 1 is massive migration (25 vs 26 populations)
 
-# This was made for 100 loci, be sure to change line 44
-
-CD2TBI <- function(replicate, timestep){
+CD2TBI <- function(replicate, timestep, scenario = 0, nloci = 100){
   # Get path for subdir associated with chosen replicate
   rep <-gtools::mixedsort(list.dirs(getwd())[replicate+2])
   #
@@ -42,10 +41,10 @@ CD2TBI <- function(replicate, timestep){
     freq.file<-cbind(freq.file,freqs)
   }
   
-  freq.file<-t(freq.file)[,seq(1,200,2)]
+  freq.file<-t(freq.file)[,seq(1,nloci,2)]
   colnames(freq.file) <- freq.file[1,]
   freq.file <- freq.file[-1,]
-  rownames(freq.file) <- 1:26
+  rownames(freq.file) <- 1:(25+scenario)
   freq.file <- apply(freq.file, 2, as.numeric)
   # Get rid of population 26 (isolated)
   freq.file <- freq.file[-nrow(freq.file),]

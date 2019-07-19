@@ -1,9 +1,9 @@
-x <-seq(0,36,0.01)
+x <-seq(0,,0.01)
 y <- 10^(-2*x)
-plot(x,y,xlim=c(0,5), type="l", col="red")
+plot(x,y,xlim=c(0,8), type="l", col="red")
 
 y_resc <- (A*10^(-B*x)-scale_min)/(scale_max-scale_min)
-lines(x,y_resc,xlim=c(0,5), type="p", col="red", add=TRUE)
+lines(x,y_resc, type="l", col="black", add=TRUE)
 
 x <-seq(0,36,0.01)
 y <- 10^(-1.301*x)
@@ -25,7 +25,7 @@ A <- 1
 B <- 2
 #10%   t=1.169661
 #20%   t=1.416
-t <- 5*sqrt(2)
+t <- sqrt(4^2+4^2)
 minCD <- 0
 scale_min<-A*10^(-B*t)
 scale_max<-A*10^(-B*minCD)
@@ -38,7 +38,7 @@ A <- 1
 B <- 1.301
 #10%   t=1.169661
 #20%   t=1.416
-t <- 5*sqrt(2)
+t <- sqrt(4^2+4^2)
 minCD <- 0
 scale_min<-A*10^(-B*t)
 scale_max<-A*10^(-B*minCD)
@@ -48,10 +48,10 @@ prob
 
 # 25%
 A <- 1
-B <- 0.60205
+B <- 0.6015
 #10%   t=1.169661
 #20%   t=1.416
-t <- 5*sqrt(2)
+t <- sqrt(4^2+4^2)
 minCD <- 0
 scale_min<-A*10^(-B*t)
 scale_max<-A*10^(-B*minCD)

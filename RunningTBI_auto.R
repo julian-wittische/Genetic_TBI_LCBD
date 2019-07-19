@@ -2,37 +2,29 @@
 # Julian Wittische 
 # July 2019
 
-# The event affects the 201th generation.
-# "t1" refers to the generation used as earliest sample in TBI()
-# "t2" refers to the generation used as latest sample in TBI()
+# The event affects the 101th generation.
+# "alpha" refers to the p.value threshold
+# "permute" refers to the permutation approach chosen (see ?TBI and Legendre 2019 for details)
+# "earliest" refers to the number of simulation replicates to be used.
+# "latest" refers to the number of simulation replicates to be used.
+# "rep" refers to the number of simulation replicates to be used (between 1 and 180).
 
 ############################################################################################################
 
-input_df <- data.frame(alpha = numeric(0), permute = numeric(0), yearsback = numeric(0))
+TBI_test_auto <- function(alpha = 0.05, earliest = 100, latest = 101,
+                       rep = length(list.files(path)), path){
+  setwd(path)
 
-# Type 1 error rate
-alpha <- 0.025
+pro <- txtProgressBar(max=rep, style=3)
 
-# Number of years to go back
-yearsback <- 5
-POS <- vector("list", length = yearsback)
-
-# "rep_num" refers to the number of simulation replicates to be used
-rep_num <- 130 # use length(list.files(getwd())) if you want all replicates
-
-# "earliest" refers to the number of simulation
-earliest <- 200 # 150 is the lowest possible
-time <- 201-earliest
-print(paste("Testing detection of the event happening", time, "year(s)/generation(s) later"))
-
-####  TPR: DOES IT IDENTIFY POSITIVE WHEN IT SHOULD? - WITH ONE STEP CRITERION ####
-
-# permute method 1
-pro <- txtProgressBar(max=rep_num, style=3)
-pos <- vector("list", length = rep_num)
-for (i in 0:(rep_num-1)) {
-  test <- TBI(CD2TBI(i, earliest), CD2TBI(i, 201), method="chord", n=1000, permute.sp = 2)
-  pop <- which(test$p.adj < 0.025)
-  pos[[i+1]] <- pop
-  setTxtProgressBar(pro,i+1)
+pos <- vector("list", length = rep)
+  for (i in 0:(rep-1)) {
+    test <- TBI(CD2TBI(i, earliest), CD2TBI(i, latest), method="chord", n=1000 )
+    pop <- which(test$p.TBI < alpha)
+    pos[[i+1]] <- pop
+    
+    setTxtProgressBar(pro,i+1)
+  }
+return(pos)
 }
+############################################################################################################
