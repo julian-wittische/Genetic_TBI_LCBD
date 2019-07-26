@@ -12,19 +12,20 @@
 ############################################################################################################
 
 TBI_test_auto <- function(alpha = 0.05, earliest = 100, latest = 101,
-                       rep = length(list.files(path)), path){
+                       rep = length(list.files(path))-1, path, scenario){
   setwd(path)
 
 pro <- txtProgressBar(max=rep, style=3)
 
 pos <- vector("list", length = rep)
   for (i in 0:(rep-1)) {
-    test <- TBI(CD2TBI(i, earliest), CD2TBI(i, latest), method="chord", n=1000 )
+    test <- TBI(CD2TBI(i, earliest, scenario = scenario), CD2TBI(i, latest, scenario = scenario), method="chord", n=1000 )
     pop <- which(test$p.TBI < alpha)
     pos[[i+1]] <- pop
     
     setTxtProgressBar(pro,i+1)
   }
+
 return(pos)
 }
 ############################################################################################################

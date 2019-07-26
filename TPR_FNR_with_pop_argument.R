@@ -8,8 +8,8 @@ FP <- function(pos_object, targets) sapply(pos_object, function(x) sum(c(unlist(
 
 FN <- function(pos_object, targets) sapply(pos_object, function(x) sum(targets%!in%c(unlist(x)))) 
 
-TN <- function(pos_object, targets) 25 - length(targets) - FP(pos_object)
-
+TN <- function(pos_object, targets) 25 - length(targets) - FP(pos_object, targets)
+#rep(25, length(pos_object))  - rep(length(targets), length(pos_object)) - FP(pos_object)
 TP_FP_check <- function(pos_object, targets){
   sapply(pos_object, length) - FP(pos_object, targets) - TP(pos_object, targets)
 }

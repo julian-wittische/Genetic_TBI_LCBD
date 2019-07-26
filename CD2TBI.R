@@ -12,11 +12,11 @@
 
 CD2TBI <- function(replicate, timestep, scenario = 0, nloci = 100){
   # Get path for subdir associated with chosen replicate
-  rep <-gtools::mixedsort(list.dirs(getwd())[replicate+2])
+  repl <-gtools::mixedsort(list.dirs(getwd())[replicate+2])
   #
   # Import output of the chosen timestep
   ind <- paste("ind", timestep,".csv", sep="")
-  input <- read.table(paste(rep,'/',ind,sep=""), header=T, sep=",")
+  input <- read.table(paste(repl,'/',ind,sep=""), header=T, sep=",")
   
   cells <- unique(input[,1])
   all <- ncol(input)-16
