@@ -50,8 +50,8 @@ plot(alpha, 1-meansfnr)
 plot(log10(alpha), meansfpr)
 plot(alpha, meansfpr)
 
-plot(alpha, meansfnr, type="l")
-lines(alpha, meansfpr, add=TRUE, col="red")
+plot(alpha, meansfnr, type="b")
+lines(alpha, meansfpr, type="b", col="red")
 
 
 
