@@ -32,3 +32,7 @@ confusion_mat <- function(pos_object, targets) {
              FOR= FN(pos_object, targets)/(FN(pos_object, targets)+TN(pos_object, targets)),
              NPV= TN(pos_object, targets)/(FN(pos_object, targets)+TN(pos_object, targets)))
 }
+
+FP_control <- function(pos_object) sapply(pos_object, function(x) sum(c(unlist(x))%!in%NULL))
+TN_control <- function(pos_object) 25 - FP_control(pos_object)
+FPR_control <- function(pos_object) FP_control(pos_object) / (FP_control(pos_object) + TN_control(pos_object))

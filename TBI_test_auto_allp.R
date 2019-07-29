@@ -26,12 +26,12 @@ TBI_test_auto_allp <- function(earliest = 100, latest = 101,
     for (i in 0:(rep-1)) {
       test <- TBI(CD2TBI(i, earliest, scenario = scenario),
                   CD2TBI(i, latest, scenario = scenario), method = "chord", n = 1000 )
-      print(paste("Which replicate ", i, sep=""))
+      print(paste("Replicate: ", i, sep=""))
       
       for (j in 1:length(alpha)) {
         pop <- which(test$p.TBI < alpha[j])
         POS[[j]][[i+1]] <- pop
-        print(paste("Which alpha ", j, sep=""))
+        #print(paste("Which alpha ", alpha[j], sep=""))
       }
       
       setTxtProgressBar(pro, i+1)

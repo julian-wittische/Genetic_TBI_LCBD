@@ -25,38 +25,80 @@ sdfnr <- sapply(combine_positions, function(x) sd(x$FNR))
 meansfnr
 sdfnr
 
+comb_pos_m <- melt(combine_positions)
+comb_pos_m$value <- as.numeric(as.character(comb_pos_m$value))
+
 #ADD control FPR to make choice
+#C_L <- TBI_test_auto_allp(rep = 180, path = "E:/Julian_simulations/C_L/output1563923314", scenario = 0)
+cl <- lapply(C_L, function(x) FPR_control(x))
+meansfpr_control <- sapply(cl, function(x) mean(x))
+sdfpr_control <- sapply(cl, function(x) sd(x))
+meansfpr_control
+sdfpr_control
+
+# plot(log10(alpha), 1-meansfnr)
+# plot(alpha, 1-meansfnr)
+# plot(log10(alpha), meansfpr)
+# plot(alpha, meansfpr)
+# 
+# plot(alpha, meansfnr, type="b", lwd=2)
+# lines(alpha, meansfpr, type="b", col="red", lwd=2)
+# lines(alpha, meansfpr_control, type="b", col="blue", lwd=2)
+# abline(h=0.1, lty=3)
+# 
+allbl <- data.frame(alpha, meansfpr_control, meansfpr, meansfnr)
+allbl_m <- melt(allbl, id.vars="alpha")
+allbl_m
+
+ggplot(data=allbl_m, aes(x=alpha, y=value, col=variable)) +
+  geom_line() +
+  geom_point() +
+  xlab("Threshold (p.TBI)") +
+  ylab("Rate") +
+  ggtitle("B_L1") +
+  scale_colour_manual(values = c("orange","blue","black"),
+                    labels = c("FPR (control)", "FPR", "FNR"),
+                    name = "Performance") +
+  geom_hline(yintercept = 0.1, linetype = "dashed")
+
+############################################################################################################
+
+
+meansfpr_bm1 <- sapply(bm1_combine_positions, function(x) mean(x$FPR))
+sdfpr_bm1 <- sapply(bm1_combine_positions, function(x) sd(x$FPR))
+meansfpr_bm1
+sdfpr_bm1
+
+meansfnr_bm1 <- sapply(bm1_combine_positions, function(x) mean(x$FNR))
+sdfnr_bm1 <- sapply(bm1_combine_positions, function(x) sd(x$FNR))
+meansfnr_bm1
+sdfnr_bm1
 
 comb_pos_m <- melt(combine_positions)
 comb_pos_m$value <- as.numeric(as.character(comb_pos_m$value))
 
-# ggplot(data = comb_pos_m[comb_pos_m$variable=="FP",], aes(x=factor(L1), y=value)) +
-#   geom_boxplot(aes(fill=variable), scale="width") + 
-#   ylim(0, 5) +
-#   xlab("p.TBI threshold") +
-#   scale_x_discrete(labels=as.character(alpha)) + 
-#   ylab("FP") + 
-#   theme(legend.position = "none")
+#ADD control FPR to make choice
+#C_L <- TBI_test_auto_allp(rep = 180, path = "E:/Julian_simulations/C_L/output1563923314", scenario = 0)
+cl <- lapply(C_L, function(x) FPR_control(x))
+meansfpr_control <- sapply(cl, function(x) mean(x))
+sdfpr_control <- sapply(cl, function(x) sd(x))
+meansfpr_control
+sdfpr_control
 
-ggplot(meansfpr)
-#   ylim(0, 5) +
-#   xlab("p.TBI threshold") +
-#   scale_x_discrete(labels=as.character(alpha)) + 
-#   ylab("FP") + 
-#   theme(legend.position = "none")
+allbl_bm1 <- data.frame(alpha, meansfpr_control, meansfpr_bm1, meansfnr)
+allbl_bm1_m <- melt(allbl, id.vars="alpha")
+allbl_bm1_m
 
-plot(log10(alpha), 1-meansfnr)
-plot(alpha, 1-meansfnr)
-plot(log10(alpha), meansfpr)
-plot(alpha, meansfpr)
-
-plot(alpha, meansfnr, type="b")
-lines(alpha, meansfpr, type="b", col="red")
-
-
-
-
-
+ggplot(data=allbl_m, aes(x=alpha, y=value, col=variable)) +
+  geom_line() +
+  geom_point() +
+  xlab("Threshold (p.TBI)") +
+  ylab("Rate") +
+  ggtitle("B_L1") +
+  scale_colour_manual(values = c("orange","blue","black"),
+                      labels = c("FPR (control)", "FPR", "FNR"),
+                      name = "Performance") +
+  geom_hline(yintercept = 0.1, linetype = "dashed")
 
 
 
