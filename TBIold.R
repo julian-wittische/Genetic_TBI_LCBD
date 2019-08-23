@@ -1,4 +1,4 @@
-TBI <- function(mat1,mat2,method="%difference", pa.tr=FALSE, nperm=99, permute.sp=1, BCD=TRUE, replace=FALSE, test.BC=TRUE, test.t.perm=FALSE, save.BC=FALSE, seed.=NULL, clock=FALSE)
+TBIold <- function(mat1,mat2,method="%difference", pa.tr=FALSE, nperm=99, permute.sp=1, BCD=TRUE, replace=FALSE, test.BC=TRUE, test.t.perm=FALSE, save.BC=FALSE, seed.=NULL, clock=FALSE)
 # Temporal beta diversity analysis. 
 # TBI: temporal beta diversity index.
 #

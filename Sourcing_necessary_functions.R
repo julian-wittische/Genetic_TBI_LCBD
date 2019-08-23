@@ -14,6 +14,8 @@ source("CD2TBI.R")
 source("TPR_FNR_with_pop_argument.R")
 
 source("TBI_test_auto_allp.R")
+source("TBI_test_auto_allp_old.R")
+source("TBIold.R")
 
 source("PlotRates.R")
 
