@@ -1,8 +1,5 @@
 # Threshold
 
-library(ggplot2)
-library(reshape2)
-
 setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
 
 meansfpr <- sapply(combine_positions, function(x) mean(x$FPR))

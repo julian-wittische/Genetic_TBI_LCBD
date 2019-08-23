@@ -1,60 +1,49 @@
-x <-seq(0,,0.01)
-y <- 10^(-2*x)
-plot(x,y,xlim=c(0,8), type="l", col="red")
-
-y_resc <- (A*10^(-B*x)-scale_min)/(scale_max-scale_min)
-lines(x,y_resc, type="l", col="black", add=TRUE)
-
-x <-seq(0,36,0.01)
-y <- 10^(-1.301*x)
-lines(x,y,xlim=c(0,5), type="l", col="green", add=TRUE)
-
-x <-seq(0,36,0.01)
-y <- 10^(-0.60205*x)
-lines(x,y,xlim=c(0,5), type="l", col="blue", add=TRUE)
-
-abline(v=1)
-abline(v=2)
-
-cdcode <- log( (1 * (t - minCD) + minCD) /A ) / (B * log(10))
-cdcode
-############################################################################################################
-
 # 1%
-A <- 1
-B <- 2
-#10%   t=1.169661
-#20%   t=1.416
+A1 <- 1
+B1 <- 2
 t <- sqrt(4^2+4^2)
 minCD <- 0
-scale_min<-A*10^(-B*t)
-scale_max<-A*10^(-B*minCD)
+scale_min1 <- A1*10^(-B1*t)
+scale_max1 <- A1*10^(-B1*minCD)
 dist <- 1
-prob <- (A*10^(-B*dist)-scale_min)/(scale_max-scale_min)
-prob
+prob1 <- (A1*10^(-B1*dist)-scale_min1)/(scale_max1-scale_min1)
+prob1
 
 # 5%
-A <- 1
-B <- 1.301
-#10%   t=1.169661
-#20%   t=1.416
+A5 <- 1
+B5 <- 1.301
 t <- sqrt(4^2+4^2)
 minCD <- 0
-scale_min<-A*10^(-B*t)
-scale_max<-A*10^(-B*minCD)
+scale_min5 <- A5*10^(-B5*t)
+scale_max5 <- A5*10^(-B5*minCD)
 dist <- 1
-prob <- (A*10^(-B*dist)-scale_min)/(scale_max-scale_min)
-prob
+prob5 <- (A5*10^(-B5*dist)-scale_min5)/(scale_max5-scale_min5)
+prob5
 
 # 25%
-A <- 1
-B <- 0.6015
-#10%   t=1.169661
-#20%   t=1.416
+A25 <- 1
+B25 <- 0.6015
 t <- sqrt(4^2+4^2)
 minCD <- 0
-scale_min<-A*10^(-B*t)
-scale_max<-A*10^(-B*minCD)
+scale_min25 <- A25*10^(-B25*t)
+scale_max25 <- A25*10^(-B25*minCD)
 dist <- 1
-prob <- (A*10^(-B*dist)-scale_min)/(scale_max-scale_min)
-prob*4/4
+prob25 <- (A25*10^(-B25*dist)-scale_min25)/(scale_max25-scale_min25)
+prob25
+
+############################################################################################################
+x <-seq(0,sqrt(4^2+4^2),0.0001)
+y_resc1 <- (A1*10^(-B1*x)-scale_min1)/(scale_max1-scale_min1)
+plot(x, y_resc1, xlim = c(0, 4*sqrt(2)), type="l", col="black")
+
+y_resc5 <- (A5*10^(-B5*x)-scale_min5)/(scale_max5-scale_min5)
+lines(x, y_resc5, xlim=c(0, 4*sqrt(2)), type="l", col="black")
+
+y_resc25 <- (A25*10^(-B25*x)-scale_min25)/(scale_max25-scale_min25)
+lines(x, y_resc25, xlim=c(0, 4*sqrt(2)), type="l", col="black")
+
+abline(v=1, type="d")
+
+# cdcode <- log( (1 * (t - minCD) + minCD) /A ) / (B * log(10))
+# cdcode
+############################################################################################################

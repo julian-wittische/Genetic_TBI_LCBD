@@ -13,4 +13,15 @@ source("CD2TBI.R")
 #source("TPR_FNR.R")
 source("TPR_FNR_with_pop_argument.R")
 
+source("TBI_test_auto_allp.R")
+
+source("PlotRates.R")
+
 '%!in%' <- function(x,y)!('%in%'(x,y))
+
+library(gtools)
+library(adespatial)
+library(vegan)
+library(ggplot2)
+library(reshape2)
+library(cowplot)
