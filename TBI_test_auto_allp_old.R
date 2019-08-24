@@ -25,7 +25,7 @@ TBI_test_auto_allp_old <- function(earliest = 100, latest = 101,
   
   for (i in 0:(rep-1)) {
     test <- TBIold(CD2TBI(i, earliest, scenario = scenario),
-                CD2TBI(i, latest, scenario = scenario), method = "chord", nperm = 1000, permute.sp=perm )
+                CD2TBI(i, latest, scenario = scenario), method = "chord", nperm = 1000, permute.sp = perm )
     print(paste("Replicate: ", i, sep=""))
     
     for (j in 1:length(alpha)) {

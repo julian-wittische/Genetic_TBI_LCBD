@@ -16,7 +16,6 @@ plotlegend <- PlotRates(L, cl, leg = "right")
 
 legend <- get_legend(plotlegend)
 
-
 pgrid <- plot_grid(plotL, plotM, plotH, ncol = 3)
 pdisp <- plot_grid(pgrid, legend, rel_widths = c(1, .1))
 pdisp

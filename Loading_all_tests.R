@@ -209,11 +209,11 @@ bl1p3_combine_positions <- mapply(rbind, bl1p3_1, bl1p3_2, bl1p3_3, bl1p3_7, bl1
                                   , SIMPLIFY=FALSE)
 
 #C_L_perm2 <- TBI_test_auto_allp_old(rep = 180, path = "E:/Julian_simulations/C_L/output1563923314",
-                                    scenario = 0, perm = 2)
+#                                    scenario = 0, perm = 2)
 clp2 <- lapply(C_L_perm2, function(x) FPR_control(x))
 
 #C_L_perm3 <- TBI_test_auto_allp_old(rep = 180, path = "E:/Julian_simulations/C_L/output1563923314",
-                                    scenario = 0, perm = 3)
+#                                    scenario = 0, perm = 3)
 clp3 <- lapply(C_L_perm3, function(x) FPR_control(x))
 
 save(B_L1, B_L2, B_L3, B_M1, B_M2, B_M3, B_H1, B_H2, B_H3,

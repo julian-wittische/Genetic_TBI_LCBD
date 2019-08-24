@@ -18,7 +18,6 @@ plotlegend <- PlotRates(L, cl, leg = "right")
 
 legend <- get_legend(plotlegend)
 
-
 pgrid <- plot_grid(plot1, plot2, plot3, ncol = 3)
 ppop <- plot_grid(pgrid, legend, rel_widths = c(1, .1))
 ppop
