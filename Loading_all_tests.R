@@ -4,7 +4,7 @@
 
 # I saved the TBI results as .RData so no need to rerun the commented lines
 
-setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
+setwd("E:/Julian_simulations")
 load("data.RData")
 
 #B_L1 <- TBI_test_auto_allp(rep = 180, path = "E:/Julian_simulations/B_L1/output1563381261", scenario = 0)
@@ -148,7 +148,7 @@ im3_7and8and13 <- lapply(I_M3, function(x) confusion_mat(x[151:180], c(7, 8, 13)
 im3_combine_positions <- mapply(rbind, im3_2and3and8, im3_2and3and8, im3_2and3and8, im3_3and7and8,
                                 im3_3and7and13, im3_7and8and13, SIMPLIFY=FALSE)
 
-I_H1 <- TBI_test_auto_allp(rep = 180, path = "E:/Julian_simulations/I_H1/output1566412750", scenario = 1)
+#I_H1 <- TBI_test_auto_allp(rep = 180, path = "E:/Julian_simulations/I_H1/output1566412750", scenario = 1)
 ih1_1 <- lapply(I_H1, function(x) confusion_mat(x[1:30], 1))
 ih1_2 <- lapply(I_H1, function(x) confusion_mat(x[31:60], 2))
 ih1_3 <- lapply(I_H1, function(x) confusion_mat(x[61:90], 3))
@@ -186,26 +186,28 @@ cm <- lapply(C_M, function(x) FPR_control(x))
 #C_H <- TBI_test_auto_allp(rep = 180, path = "E:/Julian_simulations/C_H/output1564188765", scenario = 0)
 ch <- lapply(C_H, function(x) FPR_control(x))
 
-#B_L1_perm2 <- TBI_test_auto_allp_old(rep = 180, path = "E:/Julian_simulations/B_L1/output1563381261",
-#                                     scenario = 0, perm = 2)
-bl1p2_1 <- lapply(B_L1_perm2 , function(x) confusion_mat(x[1:30], 1))
-bl1p2_2 <- lapply(B_L1_perm2 , function(x) confusion_mat(x[31:60], 2))
-bl1p2_3 <- lapply(B_L1_perm2 , function(x) confusion_mat(x[61:90], 3))
-bl1p2_7 <- lapply(B_L1_perm2 , function(x) confusion_mat(x[91:120], 7))
-bl1p2_8 <- lapply(B_L1_perm2 , function(x) confusion_mat(x[121:150], 8))
-bl1p2_13 <- lapply(B_L1_perm2 , function(x) confusion_mat(x[151:180], 13))
-bl1p2_combine_positions <- mapply(rbind, bl1p2_1, bl1p2_2, bl1p2_3, bl1p2_7, bl1p2_8, bl1p2_13
+###########################################################################################################
+
+# I_L1_perm2 <- TBI_test_auto_allp_old(rep = 180, path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                     scenario = 1, perm = 2)
+il1p2_1 <- lapply(I_L1_perm2 , function(x) confusion_mat(x[1:30], 1))
+il1p2_2 <- lapply(I_L1_perm2 , function(x) confusion_mat(x[31:60], 2))
+il1p2_3 <- lapply(I_L1_perm2 , function(x) confusion_mat(x[61:90], 3))
+il1p2_7 <- lapply(I_L1_perm2 , function(x) confusion_mat(x[91:120], 7))
+il1p2_8 <- lapply(I_L1_perm2 , function(x) confusion_mat(x[121:150], 8))
+il1p2_13 <- lapply(I_L1_perm2 , function(x) confusion_mat(x[151:180], 13))
+il1p2_combine_positions <- mapply(rbind, il1p2_1, il1p2_2, il1p2_3, il1p2_7, il1p2_8, il1p2_13
                                   , SIMPLIFY=FALSE)
 
-#B_L1_perm3 <- TBI_test_auto_allp_old(rep = 180, path = "E:/Julian_simulations/B_L1/output1563381261",
-#                                     scenario = 0, perm = 3)
-bl1p3_1 <- lapply(B_L1_perm3 , function(x) confusion_mat(x[1:30], 1))
-bl1p3_2 <- lapply(B_L1_perm3 , function(x) confusion_mat(x[31:60], 2))
-bl1p3_3 <- lapply(B_L1_perm3 , function(x) confusion_mat(x[61:90], 3))
-bl1p3_7 <- lapply(B_L1_perm3 , function(x) confusion_mat(x[91:120], 7))
-bl1p3_8 <- lapply(B_L1_perm3 , function(x) confusion_mat(x[121:150], 8))
-bl1p3_13 <- lapply(B_L1_perm3 , function(x) confusion_mat(x[151:180], 13))
-bl1p3_combine_positions <- mapply(rbind, bl1p3_1, bl1p3_2, bl1p3_3, bl1p3_7, bl1p3_8, bl1p3_13
+# I_L1_perm3 <- TBI_test_auto_allp_old(rep = 180, path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                     scenario = 1, perm = 3)
+il1p3_1 <- lapply(I_L1_perm3 , function(x) confusion_mat(x[1:30], 1))
+il1p3_2 <- lapply(I_L1_perm3 , function(x) confusion_mat(x[31:60], 2))
+il1p3_3 <- lapply(I_L1_perm3 , function(x) confusion_mat(x[61:90], 3))
+il1p3_7 <- lapply(I_L1_perm3 , function(x) confusion_mat(x[91:120], 7))
+il1p3_8 <- lapply(I_L1_perm3 , function(x) confusion_mat(x[121:150], 8))
+il1p3_13 <- lapply(I_L1_perm3 , function(x) confusion_mat(x[151:180], 13))
+il1p3_combine_positions <- mapply(rbind, il1p3_1, il1p3_2, il1p3_3, il1p3_7, il1p3_8, il1p3_13
                                   , SIMPLIFY=FALSE)
 
 #C_L_perm2 <- TBI_test_auto_allp_old(rep = 180, path = "E:/Julian_simulations/C_L/output1563923314",
@@ -216,8 +218,239 @@ clp2 <- lapply(C_L_perm2, function(x) FPR_control(x))
 #                                    scenario = 0, perm = 3)
 clp3 <- lapply(C_L_perm3, function(x) FPR_control(x))
 
-save(B_L1, B_L2, B_L3, B_M1, B_M2, B_M3, B_H1, B_H2, B_H3,
-     I_L1, I_L2, I_L3, I_M1, I_M2, I_M3, I_H1, I_H2, I_H3,
-     C_L, C_M, C_H,
-     B_L1_perm2, B_L1_perm3, C_L_perm2, C_L_perm3, file = "data.RData")
+###########################################################################################################
+
+# I_L1_2yearsafter <- TBI_test_auto_allp_old(rep = 180, latest = 102,
+#                                            path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                            scenario = 1)
+i2l1_1 <- lapply(I_L1_2yearsafter, function(x) confusion_mat(x[1:30], 1))
+i2l1_2 <- lapply(I_L1_2yearsafter, function(x) confusion_mat(x[31:60], 2))
+i2l1_3 <- lapply(I_L1_2yearsafter, function(x) confusion_mat(x[61:90], 3))
+i2l1_7 <- lapply(I_L1_2yearsafter, function(x) confusion_mat(x[91:120], 7))
+i2l1_8 <- lapply(I_L1_2yearsafter, function(x) confusion_mat(x[121:150], 8))
+i2l1_13 <- lapply(I_L1_2yearsafter, function(x) confusion_mat(x[151:180], 13))
+i2l1_combine_positions <- mapply(rbind, i2l1_1, i2l1_2, i2l1_3, i2l1_7, i2l1_8, i2l1_13, SIMPLIFY=FALSE)
+
+# I_L1_3yearsafter <- TBI_test_auto_allp_old(rep = 180, latest = 103,
+#                                            path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                            scenario = 1)
+i3l1_1 <- lapply(I_L1_3yearsafter, function(x) confusion_mat(x[1:30], 1))
+i3l1_2 <- lapply(I_L1_3yearsafter, function(x) confusion_mat(x[31:60], 2))
+i3l1_3 <- lapply(I_L1_3yearsafter, function(x) confusion_mat(x[61:90], 3))
+i3l1_7 <- lapply(I_L1_3yearsafter, function(x) confusion_mat(x[91:120], 7))
+i3l1_8 <- lapply(I_L1_3yearsafter, function(x) confusion_mat(x[121:150], 8))
+i3l1_13 <- lapply(I_L1_3yearsafter, function(x) confusion_mat(x[151:180], 13))
+i3l1_combine_positions <- mapply(rbind, i3l1_1, i3l1_2, i3l1_3, i3l1_7, i3l1_8, i3l1_13, SIMPLIFY=FALSE)
+
+# I_L1_4yearsafter <- TBI_test_auto_allp_old(rep = 180, latest = 104,
+#                                            path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                            scenario = 1)
+i4l1_1 <- lapply(I_L1_4yearsafter, function(x) confusion_mat(x[1:30], 1))
+i4l1_2 <- lapply(I_L1_4yearsafter, function(x) confusion_mat(x[31:60], 2))
+i4l1_3 <- lapply(I_L1_4yearsafter, function(x) confusion_mat(x[61:90], 3))
+i4l1_7 <- lapply(I_L1_4yearsafter, function(x) confusion_mat(x[91:120], 7))
+i4l1_8 <- lapply(I_L1_4yearsafter, function(x) confusion_mat(x[121:150], 8))
+i4l1_13 <- lapply(I_L1_4yearsafter, function(x) confusion_mat(x[151:180], 13))
+i4l1_combine_positions <- mapply(rbind, i4l1_1, i4l1_2, i4l1_3, i4l1_7, i4l1_8, i4l1_13, SIMPLIFY=FALSE)
+
+# I_L1_5yearsafter <- TBI_test_auto_allp_old(rep = 180, latest = 105,
+#                                           path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                           scenario = 1)
+i5l1_1 <- lapply(I_L1_5yearsafter, function(x) confusion_mat(x[1:30], 1))
+i5l1_2 <- lapply(I_L1_5yearsafter, function(x) confusion_mat(x[31:60], 2))
+i5l1_3 <- lapply(I_L1_5yearsafter, function(x) confusion_mat(x[61:90], 3))
+i5l1_7 <- lapply(I_L1_5yearsafter, function(x) confusion_mat(x[91:120], 7))
+i5l1_8 <- lapply(I_L1_5yearsafter, function(x) confusion_mat(x[121:150], 8))
+i5l1_13 <- lapply(I_L1_5yearsafter, function(x) confusion_mat(x[151:180], 13))
+i5l1_combine_positions <- mapply(rbind, i5l1_1, i5l1_2, i5l1_3, i5l1_7, i5l1_8, i5l1_13, SIMPLIFY=FALSE)
+
+# I_L1_6yearsafter <- TBI_test_auto_allp_old(rep = 180, latest = 106,
+#                                            path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                            scenario = 1)
+i6l1_1 <- lapply(I_L1_6yearsafter, function(x) confusion_mat(x[1:30], 1))
+i6l1_2 <- lapply(I_L1_6yearsafter, function(x) confusion_mat(x[31:60], 2))
+i6l1_3 <- lapply(I_L1_6yearsafter, function(x) confusion_mat(x[61:90], 3))
+i6l1_7 <- lapply(I_L1_6yearsafter, function(x) confusion_mat(x[91:120], 7))
+i6l1_8 <- lapply(I_L1_6yearsafter, function(x) confusion_mat(x[121:150], 8))
+i6l1_13 <- lapply(I_L1_6yearsafter, function(x) confusion_mat(x[151:180], 13))
+i6l1_combine_positions <- mapply(rbind, i6l1_1, i6l1_2, i6l1_3, i6l1_7, i6l1_8, i6l1_13, SIMPLIFY=FALSE)
+
+# I_H3_2yearsafter <- TBI_test_auto_allp_old(rep = 180, latest = 102,
+#                                            path = "E:/Julian_simulations/I_H3/output1566011636",
+#                                            scenario = 1)
+i2h3_1 <- lapply(I_H3_2yearsafter, function(x) confusion_mat(x[1:30], 1))
+i2h3_2 <- lapply(I_H3_2yearsafter, function(x) confusion_mat(x[31:60], 2))
+i2h3_3 <- lapply(I_H3_2yearsafter, function(x) confusion_mat(x[61:90], 3))
+i2h3_7 <- lapply(I_H3_2yearsafter, function(x) confusion_mat(x[91:120], 7))
+i2h3_8 <- lapply(I_H3_2yearsafter, function(x) confusion_mat(x[121:150], 8))
+i2h3_13 <- lapply(I_H3_2yearsafter, function(x) confusion_mat(x[151:180], 13))
+i2h3_combine_positions <- mapply(rbind, i2h3_1, i2h3_2, i2h3_3, i2h3_7, i2h3_8, i2h3_13, SIMPLIFY=FALSE)
+
+# I_H3_3yearsafter <- TBI_test_auto_allp_old(rep = 180, latest = 103,
+#                                            path = "E:/Julian_simulations/I_H3/output1566011636",
+#                                            scenario = 1)
+i3h3_1 <- lapply(I_H3_3yearsafter, function(x) confusion_mat(x[1:30], 1))
+i3h3_2 <- lapply(I_H3_3yearsafter, function(x) confusion_mat(x[31:60], 2))
+i3h3_3 <- lapply(I_H3_3yearsafter, function(x) confusion_mat(x[61:90], 3))
+i3h3_7 <- lapply(I_H3_3yearsafter, function(x) confusion_mat(x[91:120], 7))
+i3h3_8 <- lapply(I_H3_3yearsafter, function(x) confusion_mat(x[121:150], 8))
+i3h3_13 <- lapply(I_H3_3yearsafter, function(x) confusion_mat(x[151:180], 13))
+i3h3_combine_positions <- mapply(rbind, i3h3_1, i3h3_2, i3h3_3, i3h3_7, i3h3_8, i3h3_13, SIMPLIFY=FALSE)
+
+# I_H3_4yearsafter <- TBI_test_auto_allp_old(rep = 180, latest = 104,
+#                                            path = "E:/Julian_simulations/I_H3/output1566011636",
+#                                            scenario = 1)
+i4h3_1 <- lapply(I_H3_4yearsafter, function(x) confusion_mat(x[1:30], 1))
+i4h3_2 <- lapply(I_H3_4yearsafter, function(x) confusion_mat(x[31:60], 2))
+i4h3_3 <- lapply(I_H3_4yearsafter, function(x) confusion_mat(x[61:90], 3))
+i4h3_7 <- lapply(I_H3_4yearsafter, function(x) confusion_mat(x[91:120], 7))
+i4h3_8 <- lapply(I_H3_4yearsafter, function(x) confusion_mat(x[121:150], 8))
+i4h3_13 <- lapply(I_H3_4yearsafter, function(x) confusion_mat(x[151:180], 13))
+i4h3_combine_positions <- mapply(rbind, i4h3_1, i4h3_2, i4h3_3, i4h3_7, i4h3_8, i4h3_13, SIMPLIFY=FALSE)
+
+# I_H3_5yearsafter <- TBI_test_auto_allp_old(rep = 180, latest = 105,
+#                                           path = "E:/Julian_simulations/I_H3/output1566011636",
+#                                           scenario = 1)
+i5h3_1 <- lapply(I_H3_5yearsafter, function(x) confusion_mat(x[1:30], 1))
+i5h3_2 <- lapply(I_H3_5yearsafter, function(x) confusion_mat(x[31:60], 2))
+i5h3_3 <- lapply(I_H3_5yearsafter, function(x) confusion_mat(x[61:90], 3))
+i5h3_7 <- lapply(I_H3_5yearsafter, function(x) confusion_mat(x[91:120], 7))
+i5h3_8 <- lapply(I_H3_5yearsafter, function(x) confusion_mat(x[121:150], 8))
+i5h3_13 <- lapply(I_H3_5yearsafter, function(x) confusion_mat(x[151:180], 13))
+i5h3_combine_positions <- mapply(rbind, i5h3_1, i5h3_2, i5h3_3, i5h3_7, i5h3_8, i5h3_13, SIMPLIFY=FALSE)
+
+# I_H3_6yearsafter <- TBI_test_auto_allp_old(rep = 180, latest = 106,
+#                                           path = "E:/Julian_simulations/I_H3/output1566011636",
+#                                           scenario = 1)
+i6h3_1 <- lapply(I_H3_6yearsafter, function(x) confusion_mat(x[1:30], 1))
+i6h3_2 <- lapply(I_H3_6yearsafter, function(x) confusion_mat(x[31:60], 2))
+i6h3_3 <- lapply(I_H3_6yearsafter, function(x) confusion_mat(x[61:90], 3))
+i6h3_7 <- lapply(I_H3_6yearsafter, function(x) confusion_mat(x[91:120], 7))
+i6h3_8 <- lapply(I_H3_6yearsafter, function(x) confusion_mat(x[121:150], 8))
+i6h3_13 <- lapply(I_H3_6yearsafter, function(x) confusion_mat(x[151:180], 13))
+i6h3_combine_positions <- mapply(rbind, i6h3_1, i6h3_2, i6h3_3, i6h3_7, i6h3_8, i6h3_13, SIMPLIFY=FALSE)
+
+##########################################################################################################
+
+# I_L1_2yearsbefore <- TBI_test_auto_allp_old(rep = 180, earliest = 99,
+#                                            path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                            scenario = 1)
+i2l1b_1 <- lapply(I_L1_2yearsbefore, function(x) confusion_mat(x[1:30], 1))
+i2l1b_2 <- lapply(I_L1_2yearsbefore, function(x) confusion_mat(x[31:60], 2))
+i2l1b_3 <- lapply(I_L1_2yearsbefore, function(x) confusion_mat(x[61:90], 3))
+i2l1b_7 <- lapply(I_L1_2yearsbefore, function(x) confusion_mat(x[91:120], 7))
+i2l1b_8 <- lapply(I_L1_2yearsbefore, function(x) confusion_mat(x[121:150], 8))
+i2l1b_13 <- lapply(I_L1_2yearsbefore, function(x) confusion_mat(x[151:180], 13))
+i2l1b_combine_positions <- mapply(rbind, i2l1b_1, i2l1b_2, i2l1b_3, i2l1b_7, i2l1b_8, i2l1b_13, SIMPLIFY=FALSE)
+
+# I_L1_3yearsbefore <- TBI_test_auto_allp_old(rep = 180, earliest = 98,
+#                                            path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                            scenario = 1)
+i3l1b_1 <- lapply(I_L1_3yearsbefore, function(x) confusion_mat(x[1:30], 1))
+i3l1b_2 <- lapply(I_L1_3yearsbefore, function(x) confusion_mat(x[31:60], 2))
+i3l1b_3 <- lapply(I_L1_3yearsbefore, function(x) confusion_mat(x[61:90], 3))
+i3l1b_7 <- lapply(I_L1_3yearsbefore, function(x) confusion_mat(x[91:120], 7))
+i3l1b_8 <- lapply(I_L1_3yearsbefore, function(x) confusion_mat(x[121:150], 8))
+i3l1b_13 <- lapply(I_L1_3yearsbefore, function(x) confusion_mat(x[151:180], 13))
+i3l1b_combine_positions <- mapply(rbind, i3l1b_1, i3l1b_2, i3l1b_3, i3l1b_7, i3l1b_8, i3l1b_13, SIMPLIFY=FALSE)
+
+# I_L1_4yearsbefore <- TBI_test_auto_allp_old(rep = 180, earliest = 97,
+#                                            path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                            scenario = 1)
+i4l1b_1 <- lapply(I_L1_4yearsbefore, function(x) confusion_mat(x[1:30], 1))
+i4l1b_2 <- lapply(I_L1_4yearsbefore, function(x) confusion_mat(x[31:60], 2))
+i4l1b_3 <- lapply(I_L1_4yearsbefore, function(x) confusion_mat(x[61:90], 3))
+i4l1b_7 <- lapply(I_L1_4yearsbefore, function(x) confusion_mat(x[91:120], 7))
+i4l1b_8 <- lapply(I_L1_4yearsbefore, function(x) confusion_mat(x[121:150], 8))
+i4l1b_13 <- lapply(I_L1_4yearsbefore, function(x) confusion_mat(x[151:180], 13))
+i4l1b_combine_positions <- mapply(rbind, i4l1b_1, i4l1b_2, i4l1b_3, i4l1b_7, i4l1b_8, i4l1b_13, SIMPLIFY=FALSE)
+
+# I_L1_5yearsbefore <- TBI_test_auto_allp_old(rep = 180, earliest = 96,
+#                                           path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                           scenario = 1)
+i5l1b_1 <- lapply(I_L1_5yearsbefore, function(x) confusion_mat(x[1:30], 1))
+i5l1b_2 <- lapply(I_L1_5yearsbefore, function(x) confusion_mat(x[31:60], 2))
+i5l1b_3 <- lapply(I_L1_5yearsbefore, function(x) confusion_mat(x[61:90], 3))
+i5l1b_7 <- lapply(I_L1_5yearsbefore, function(x) confusion_mat(x[91:120], 7))
+i5l1b_8 <- lapply(I_L1_5yearsbefore, function(x) confusion_mat(x[121:150], 8))
+i5l1b_13 <- lapply(I_L1_5yearsbefore, function(x) confusion_mat(x[151:180], 13))
+i5l1b_combine_positions <- mapply(rbind, i5l1b_1, i5l1b_2, i5l1b_3, i5l1b_7, i5l1b_8, i5l1b_13, SIMPLIFY=FALSE)
+
+# I_L1_6yearsbefore <- TBI_test_auto_allp_old(rep = 180, earliest = 95,
+#                                            path = "E:/Julian_simulations/I_L1/output1563928846",
+#                                            scenario = 1)
+i6l1b_1 <- lapply(I_L1_6yearsbefore, function(x) confusion_mat(x[1:30], 1))
+i6l1b_2 <- lapply(I_L1_6yearsbefore, function(x) confusion_mat(x[31:60], 2))
+i6l1b_3 <- lapply(I_L1_6yearsbefore, function(x) confusion_mat(x[61:90], 3))
+i6l1b_7 <- lapply(I_L1_6yearsbefore, function(x) confusion_mat(x[91:120], 7))
+i6l1b_8 <- lapply(I_L1_6yearsbefore, function(x) confusion_mat(x[121:150], 8))
+i6l1b_13 <- lapply(I_L1_6yearsbefore, function(x) confusion_mat(x[151:180], 13))
+i6l1b_combine_positions <- mapply(rbind, i6l1b_1, i6l1b_2, i6l1b_3, i6l1b_7, i6l1b_8, i6l1b_13, SIMPLIFY=FALSE)
+
+# I_H3_2yearsbefore <- TBI_test_auto_allp_old(rep = 180, earliest = 99,
+#                                            path = "E:/Julian_simulations/I_H3/output1566011636",
+#                                            scenario = 1)
+i2h3b_1 <- lapply(I_H3_2yearsbefore, function(x) confusion_mat(x[1:30], 1))
+i2h3b_2 <- lapply(I_H3_2yearsbefore, function(x) confusion_mat(x[31:60], 2))
+i2h3b_3 <- lapply(I_H3_2yearsbefore, function(x) confusion_mat(x[61:90], 3))
+i2h3b_7 <- lapply(I_H3_2yearsbefore, function(x) confusion_mat(x[91:120], 7))
+i2h3b_8 <- lapply(I_H3_2yearsbefore, function(x) confusion_mat(x[121:150], 8))
+i2h3b_13 <- lapply(I_H3_2yearsbefore, function(x) confusion_mat(x[151:180], 13))
+i2h3b_combine_positions <- mapply(rbind, i2h3b_1, i2h3b_2, i2h3b_3, i2h3b_7, i2h3b_8, i2h3b_13, SIMPLIFY=FALSE)
+
+# I_H3_3yearsbefore <- TBI_test_auto_allp_old(rep = 180, earliest = 98,
+#                                            path = "E:/Julian_simulations/I_H3/output1566011636",
+#                                            scenario = 1)
+i3h3b_1 <- lapply(I_H3_3yearsbefore, function(x) confusion_mat(x[1:30], 1))
+i3h3b_2 <- lapply(I_H3_3yearsbefore, function(x) confusion_mat(x[31:60], 2))
+i3h3b_3 <- lapply(I_H3_3yearsbefore, function(x) confusion_mat(x[61:90], 3))
+i3h3b_7 <- lapply(I_H3_3yearsbefore, function(x) confusion_mat(x[91:120], 7))
+i3h3b_8 <- lapply(I_H3_3yearsbefore, function(x) confusion_mat(x[121:150], 8))
+i3h3b_13 <- lapply(I_H3_3yearsbefore, function(x) confusion_mat(x[151:180], 13))
+i3h3b_combine_positions <- mapply(rbind, i3h3b_1, i3h3b_2, i3h3b_3, i3h3b_7, i3h3b_8, i3h3b_13, SIMPLIFY=FALSE)
+
+# I_H3_4yearsbefore <- TBI_test_auto_allp_old(rep = 180, earliest = 97,
+#                                            path = "E:/Julian_simulations/I_H3/output1566011636",
+#                                            scenario = 1)
+i4h3b_1 <- lapply(I_H3_4yearsbefore, function(x) confusion_mat(x[1:30], 1))
+i4h3b_2 <- lapply(I_H3_4yearsbefore, function(x) confusion_mat(x[31:60], 2))
+i4h3b_3 <- lapply(I_H3_4yearsbefore, function(x) confusion_mat(x[61:90], 3))
+i4h3b_7 <- lapply(I_H3_4yearsbefore, function(x) confusion_mat(x[91:120], 7))
+i4h3b_8 <- lapply(I_H3_4yearsbefore, function(x) confusion_mat(x[121:150], 8))
+i4h3b_13 <- lapply(I_H3_4yearsbefore, function(x) confusion_mat(x[151:180], 13))
+i4h3b_combine_positions <- mapply(rbind, i4h3b_1, i4h3b_2, i4h3b_3, i4h3b_7, i4h3b_8, i4h3b_13, SIMPLIFY=FALSE)
+
+# I_H3_5yearsbefore <- TBI_test_auto_allp_old(rep = 180, earliest = 96,
+#                                           path = "E:/Julian_simulations/I_H3/output1566011636",
+#                                           scenario = 1)
+i5h3b_1 <- lapply(I_H3_5yearsbefore, function(x) confusion_mat(x[1:30], 1))
+i5h3b_2 <- lapply(I_H3_5yearsbefore, function(x) confusion_mat(x[31:60], 2))
+i5h3b_3 <- lapply(I_H3_5yearsbefore, function(x) confusion_mat(x[61:90], 3))
+i5h3b_7 <- lapply(I_H3_5yearsbefore, function(x) confusion_mat(x[91:120], 7))
+i5h3b_8 <- lapply(I_H3_5yearsbefore, function(x) confusion_mat(x[121:150], 8))
+i5h3b_13 <- lapply(I_H3_5yearsbefore, function(x) confusion_mat(x[151:180], 13))
+i5h3b_combine_positions <- mapply(rbind, i5h3b_1, i5h3b_2, i5h3b_3, i5h3b_7, i5h3b_8, i5h3b_13, SIMPLIFY=FALSE)
+
+# I_H3_6yearsbefore <- TBI_test_auto_allp_old(rep = 180, earliest = 95,
+#                                           path = "E:/Julian_simulations/I_H3/output1566011636",
+#                                            scenario = 1)
+i6h3b_1 <- lapply(I_H3_6yearsbefore, function(x) confusion_mat(x[1:30], 1))
+i6h3b_2 <- lapply(I_H3_6yearsbefore, function(x) confusion_mat(x[31:60], 2))
+i6h3b_3 <- lapply(I_H3_6yearsbefore, function(x) confusion_mat(x[61:90], 3))
+i6h3b_7 <- lapply(I_H3_6yearsbefore, function(x) confusion_mat(x[91:120], 7))
+i6h3b_8 <- lapply(I_H3_6yearsbefore, function(x) confusion_mat(x[121:150], 8))
+i6h3b_13 <- lapply(I_H3_6yearsbefore, function(x) confusion_mat(x[151:180], 13))
+i6h3b_combine_positions <- mapply(rbind, i6h3b_1, i6h3b_2, i6h3b_3, i6h3b_7, i6h3b_8, i6h3b_13, SIMPLIFY=FALSE)
+
+###########################################################################################################
+
+# save(I_L1, I_L2, I_L3, I_M1, I_M2, I_M3, I_H1, I_H2, I_H3,
+#      I_L1, I_L2, I_L3, I_M1, I_M2, I_M3, I_H1, I_H2, I_H3,
+#      C_L, C_M, C_H,
+#      I_L1_perm2, I_L1_perm3, C_L_perm2, C_L_perm3,
+#      I_L1_2yearsafter, I_L1_3yearsafter, I_L1_4yearsafter, I_L1_5yearsafter, I_L1_6yearsafter,
+#      I_H3_2yearsafter, I_H3_3yearsafter, I_H3_4yearsafter, I_H3_5yearsafter, I_H3_6yearsafter,
+#      I_L1_2yearsbefore, I_L1_3yearsbefore, I_L1_4yearsbefore, I_L1_5yearsbefore, I_L1_6yearsbefore,
+#      I_H3_2yearsbefore, I_H3_3yearsbefore, I_H3_4yearsbefore, I_H3_5yearsbefore, I_H3_6yearsbefore,
+#      file = "E:/Julian_simulations/data.RData")
 ###########################################################################################################

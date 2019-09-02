@@ -1,5 +1,5 @@
 PlotRates <- function(scenario_pos, control_pos, leg = "none",
-                      xlab = "", ylab ="",
+                      xlab = "", ylab ="", title = "",
                       alpha = c(0.0001, 0.00025, 0.0005, 0.00075, 0.001, 0.0025, 0.005,
                                 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1)){
   
@@ -11,7 +11,7 @@ PlotRates <- function(scenario_pos, control_pos, leg = "none",
   
   meansfpr_control <- sapply(control_pos, function(x) mean(x))
   sdfpr_control <- sapply(control_pos, function(x) sd(x))
-  
+
   allbl <- data.frame(alpha, meansfpr_control, meansfpr, meansfnr)
   allbl_m <- melt(allbl, id.vars="alpha")
   
@@ -20,7 +20,7 @@ PlotRates <- function(scenario_pos, control_pos, leg = "none",
     geom_point() +
     xlab(xlab) +
     ylab(ylab) +
-    ggtitle(substr(deparse(substitute(scenario_pos)), 1, 3)) +
+    ggtitle(title) + #substr(deparse(substitute(scenario_pos)), 1, 3)
     scale_colour_manual(values = c("orange","blue","black"),
                         labels = c("FPR (control)", "FPR", "FNR"),
                         name = "Performance") +
