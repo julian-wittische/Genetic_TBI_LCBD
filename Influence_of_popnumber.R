@@ -21,3 +21,36 @@ legend <- get_legend(plotlegend)
 pgrid <- plot_grid(plot1, plot2, plot3, ncol = 3)
 ppop <- plot_grid(pgrid, legend, rel_widths = c(1, .1))
 ppop
+
+sapply(one, function(x) mean(x$FNR))[9]
+sapply(two, function(x) mean(x$FNR))[9]
+sapply(three, function(x) mean(x$FNR))[9]
+
+sapply(one, function(x) mean(x$FPR))[9]
+sapply(two, function(x) mean(x$FPR))[9]
+sapply(three, function(x) mean(x$FPR))[9]
+####
+sapply(one, function(x) mean(x$FPR))[10]
+sapply(two, function(x) mean(x$FPR))[10]
+sapply(three, function(x) mean(x$FPR))[10]
+
+sapply(one, function(x) mean(x$FNR))[10]
+sapply(two, function(x) mean(x$FNR))[10]
+sapply(three, function(x) mean(x$FNR))[10]
+
+sapply(one, function(x) mean(x$FNR))[11]
+sapply(two, function(x) mean(x$FNR))[11]
+sapply(three, function(x) mean(x$FNR))[11]
+
+sapply(one, function(x) mean(x$FPR))[11]
+sapply(two, function(x) mean(x$FPR))[11]
+sapply(three, function(x) mean(x$FPR))[11]
+####
+alpha <- c(0.0001, 0.00025, 0.0005, 0.00075, 0.001, 0.0025, 0.005, 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1)
+mone <- sapply(one, function(x) mean(x$FPR))
+mtwo <- sapply(two, function(x) mean(x$FPR))
+mthree <- sapply(three, function(x) mean(x$FPR))
+
+plot(alpha, mone, col = "red", pch=19, ylim = c(0,0.052))
+points(alpha, mtwo, col = "blue", pch=19)
+points(alpha, mthree, col = "green", pch=19)

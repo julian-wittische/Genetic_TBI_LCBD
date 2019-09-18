@@ -22,9 +22,10 @@ PlotRates <- function(scenario_pos, control_pos, leg = "none",
     ylab(ylab) +
     ggtitle(title) + #substr(deparse(substitute(scenario_pos)), 1, 3)
     scale_colour_manual(values = c("orange","blue","black"),
-                        labels = c("FPR (control)", "FPR", "FNR"),
+                        labels = c("control", "FPR", "FNR"),
                         name = "Performance") +
     geom_hline(yintercept = 0.1, linetype = "dashed") +
     theme(legend.position=leg) +
-    theme(text=element_text(size=12,  family="serif"))
+    theme(text=element_text(size=12,  family="serif")) +
+    coord_fixed(ratio=0.25)
 }

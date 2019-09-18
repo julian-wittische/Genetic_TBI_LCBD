@@ -33,9 +33,7 @@ ml <- sapply(L, function(x) mean(x$FPR))
 mm <- sapply(M, function(x) mean(x$FPR))
 mh <- sapply(H, function(x) mean(x$FPR))
 
-plot(alpha, ml, col = "red", pch=19, ylim = c(0,0.052))
-points(alpha, mm, col = "blue", pch=19)
-points(alpha, mh, col = "green", pch=19)
+plot(alpha, ml, col = "red")
 
 
 
