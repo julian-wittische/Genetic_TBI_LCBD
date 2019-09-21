@@ -1,3 +1,41 @@
+B_L1_light <- TBI_test_auto_allp_TBIgenJW_test(rep = 180,
+                                               path = "E:/Julian_simulations/B_L1/output1563381261",
+                                               scenario = 0)
+bl1_1_light <- lapply(B_L1_light, function(x) confusion_mat(x[1:30], 1))
+bl1_1[[13]]
+bl1_1_light[[13]]
+##
+
+#
+
+
+
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Testing TBI_test_auto()
 setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
 a <- "E:/Julian_simulations/B_L/output1563381261"

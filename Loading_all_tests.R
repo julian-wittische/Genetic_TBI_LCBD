@@ -265,8 +265,8 @@ i5l1_13 <- lapply(I_L1_5yearsafter, function(x) confusion_mat(x[151:180], 13))
 i5l1_combine_positions <- mapply(rbind, i5l1_1, i5l1_2, i5l1_3, i5l1_7, i5l1_8, i5l1_13, SIMPLIFY=FALSE)
 # 
 # I_H3_2yearsafter <- TBI_test_auto_allp_old(rep = 180, latest = 102,
-                                           path = "E:/Julian_simulations/I_H3/output1566011636",
-                                           scenario = 1)
+                                           # path = "E:/Julian_simulations/I_H3/output1566011636",
+                                           # scenario = 1)
 i2h3_1 <- lapply(I_H3_2yearsafter, function(x) confusion_mat(x[1:30], c(2, 3, 8)))
 i2h3_2 <- lapply(I_H3_2yearsafter, function(x) confusion_mat(x[31:60], c(2, 7, 13)))
 i2h3_3 <- lapply(I_H3_2yearsafter, function(x) confusion_mat(x[61:90], c(2, 8, 13)))
