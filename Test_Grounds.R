@@ -1,3 +1,36 @@
+start <- proc.time()
+TEST <- TBI_test_auto_allp_TBIgenJW_test(path = "E:/Julian_simulations/MICRO_B_L1/output1568926112", scenario = 0,
+                                         nloci = 10, nalleles = 10)
+end <- proc.time()
+end-start
+
+TEST2 <- TBI_test_auto_allp(rep = 2, path = "E:/Julian_simulations/B_L1/output1563381261", scenario = 0)
+
+#
+# # Various adegenet tests
+# genp@tab[1:2,]
+# genp@tab[2,] <- genp@tab[1,]
+# dist.genpop(genp[1:2,])
+
+# setwd("E:/Julian_simulations/MICRO_B_L1/output1568926112")
+# yeeet1 <- CDmicro2genpop(0,100)
+# yeeet2 <- CDmicro2genpop(0,101)
+# 
+# setwd("E:/Julian_simulations/B_L1/output1563381261")
+# yeeet3 <- CDmicro2genpop(0,100, nloci=100, nalleles=2)
+# yeeet4 <- CDmicro2genpop(0,101, nloci=100, nalleles=2)
+# 
+# yeeet5 <- CD2TBI(0, 100)
+#   
+# dissim_test(yeeet1, yeeet2)
+# dissim_test(yeeet3, yeeet4)
+
+TBIgenJW_test(yeeet3, yeeet4, nperm=999)
+TBIgenJW_test(CDmicro2genpop(1,100, nloci=100, nalleles=2), CDmicro2genpop(1,101, nloci=100, nalleles=2), nperm=99, method=4)
+
+
+
+#
 B_L1_light <- TBI_test_auto_allp_TBIgenJW_test(rep = 180,
                                                path = "E:/Julian_simulations/B_L1/output1563381261",
                                                scenario = 0)
@@ -5,36 +38,6 @@ bl1_1_light <- lapply(B_L1_light, function(x) confusion_mat(x[1:30], 1))
 bl1_1[[13]]
 bl1_1_light[[13]]
 ##
-
-#
-
-
-
-#
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Testing TBI_test_auto()
 setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
