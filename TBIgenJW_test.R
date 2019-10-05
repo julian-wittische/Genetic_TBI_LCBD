@@ -1,5 +1,4 @@
 TBIgenJW_test <- function (mat1, mat2, nperm = 99, replace = FALSE, seed. = NULL, method = 4) {
-  #count <- NULL
 
 ##### dissim function to compute dissimilarities  
   dissim <- function(mat1, mat2, method ) {
@@ -29,10 +28,8 @@ TBIgenJW_test <- function (mat1, mat2, nperm = 99, replace = FALSE, seed. = NULL
       # print(nrow(mat1@tab))
       # print(ncol(mat1@tab))
       # print(nrow(mat2@tab))
-      print(ncol(mat2@tab))
-      print(mat2@tab)
-      #count <- count +1
-      print(getwd())
+      # print(ncol(mat2@tab))
+      # print(mat2@tab)
       stop("The matrices are not of the same size!")
     }
 
