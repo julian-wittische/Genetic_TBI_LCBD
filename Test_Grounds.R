@@ -2,7 +2,7 @@ start <- proc.time()
 TEST <- TBI_test_auto_allp_TBIgenJW_test(path = "E:/Julian_simulations/MICRO_B_L1/output1568926112", scenario = 0,
                                          nloci = 10, nalleles = 10)
 end <- proc.time()
-end-start
+(end-start)/60/60
 
 TEST2 <- TBI_test_auto_allp(rep = 2, path = "E:/Julian_simulations/B_L1/output1563381261", scenario = 0)
 
