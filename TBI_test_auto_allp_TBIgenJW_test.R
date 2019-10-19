@@ -18,7 +18,8 @@ TBI_test_auto_allp_TBIgenJW_test <- function(earliest = 100, latest = 101,
                                          0.01, 0.025, 0.05, 0.075,
                                          0.1),
                                nloci = 10,
-                               nalleles = 10){
+                               nalleles = 10,
+                               nperm = 99){
   setwd(path)
   
   pro <- txtProgressBar(max = rep, style = 3)
@@ -29,7 +30,7 @@ TBI_test_auto_allp_TBIgenJW_test <- function(earliest = 100, latest = 101,
     test <- TBIgenJW_test(CDmicro2genpop(i, earliest, scenario = scenario, nloci = nloci, nalleles = nalleles),
                           CDmicro2genpop(i, latest, scenario = scenario, nloci = nloci, nalleles = nalleles),
                           method = 4,
-                          nperm = 99)
+                          nperm = nperm)
     print(paste("Replicate: ", i, sep=""))
     
     for (j in 1:length(alpha)) {
