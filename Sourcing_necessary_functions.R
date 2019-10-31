@@ -6,7 +6,7 @@
 #setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
 
 # Source script to install and load necessary packages
-source("Installing_missing_packages.R")
+#source("Installing_missing_packages.R")
 
 # Source function which creates TBI input from CDMetaPOP
 source("CD2TBI.R")
