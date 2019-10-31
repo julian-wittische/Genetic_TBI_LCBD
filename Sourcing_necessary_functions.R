@@ -21,7 +21,7 @@ source("TBI_test_auto_allp_old.R")
 source("TBIold.R")
 source("TBI_test_auto_allp_TBIgenJW_test.R")
 source("TBIgenJW_test.R")
-source("CDmicro2genind.R")
+source("Cdmicro2genind.R")
 
 source("PlotRates.R")
 
