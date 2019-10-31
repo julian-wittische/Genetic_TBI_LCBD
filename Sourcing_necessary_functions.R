@@ -3,7 +3,7 @@
 # July 2019
 
 
-setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
+#setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
 
 # Source script to install and load necessary packages
 source("Installing_missing_packages.R")
