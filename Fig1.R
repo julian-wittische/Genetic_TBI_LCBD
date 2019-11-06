@@ -63,8 +63,8 @@ p +
   scale_color_manual(name = "Dispersal",
                      values = c("fun.1" = "violet", "fun.2" = "violetred", "fun.3" = "violetred4"),
                      labels = c("Low", "Intermediate", "High")) +
-  geom_vline(xintercept = 1, linetype = "dashed") +
-  ylab("Probability of reaching a pop. at CD") +
-  xlab("Cost distance") +
+  #geom_vline(xintercept = 1, linetype = "dashed") +
+  ylab("Probability of dispersal") +
+  xlab("Distance from home population") +
   theme(text=element_text(size=18,  family="serif"))
 

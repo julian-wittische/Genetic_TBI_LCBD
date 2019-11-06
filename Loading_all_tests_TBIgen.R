@@ -9,10 +9,10 @@ B_L1_m <- TBI_test_auto_allp_TBIgenJW_test(rep = 180, path = "E:/Julian_simulati
 end <- Sys.time()
 end-start
 
-bl1_1 <- lapply(B_L1, function(x) confusion_mat(x[1:30], 1))
-bl1_2 <- lapply(B_L1, function(x) confusion_mat(x[31:60], 2))
-bl1_3 <- lapply(B_L1, function(x) confusion_mat(x[61:90], 3))
-bl1_7 <- lapply(B_L1, function(x) confusion_mat(x[91:120], 7))
-bl1_8 <- lapply(B_L1, function(x) confusion_mat(x[121:150], 8))
-bl1_13 <- lapply(B_L1, function(x) confusion_mat(x[151:180], 13))
-bl1_combine_positions <- mapply(rbind, bl1_1, bl1_2, bl1_3, bl1_7, bl1_8, bl1_13, SIMPLIFY=FALSE)
+mbl1_1 <- lapply(B_L1_m, function(x) confusion_mat(x[1:30], 1))
+mbl1_2 <- lapply(B_L1_m, function(x) confusion_mat(x[31:60], 2))
+mbl1_3 <- lapply(B_L1_m, function(x) confusion_mat(x[61:90], 3))
+mbl1_7 <- lapply(B_L1_m, function(x) confusion_mat(x[91:120], 7))
+mbl1_8 <- lapply(B_L1_m, function(x) confusion_mat(x[121:150], 8))
+mbl1_13 <- lapply(B_L1_m, function(x) confusion_mat(x[151:180], 13))
+mbl1_combine_positions <- mapply(rbind, mbl1_1, mbl1_2, mbl1_3, mbl1_7, mbl1_8, mbl1_13, SIMPLIFY=FALSE)
