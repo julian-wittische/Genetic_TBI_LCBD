@@ -8,7 +8,7 @@ B_L1_m <- TBI_test_auto_allp_TBIgenJW_test(rep = 180, path = "/project/6005201/p
                                       nalleles = 2,
                                       nperm = 999)
 end <- Sys.time()
-end-start
+print(end-start)
 
 mbl1_1 <- lapply(B_L1_m, function(x) confusion_mat(x[1:30], 1))
 mbl1_2 <- lapply(B_L1_m, function(x) confusion_mat(x[31:60], 2))
@@ -17,4 +17,4 @@ mbl1_7 <- lapply(B_L1_m, function(x) confusion_mat(x[91:120], 7))
 mbl1_8 <- lapply(B_L1_m, function(x) confusion_mat(x[121:150], 8))
 mbl1_13 <- lapply(B_L1_m, function(x) confusion_mat(x[151:180], 13))
 mbl1_combine_positions <- mapply(rbind, mbl1_1, mbl1_2, mbl1_3, mbl1_7, mbl1_8, mbl1_13, SIMPLIFY=FALSE)
-save(B_L1_m, file=B_L1_m.RData)
+save(B_L1_m, file="B_L1_m.RData")

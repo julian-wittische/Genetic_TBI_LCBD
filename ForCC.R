@@ -29,7 +29,7 @@ library(pegas)
 library(hierfstat)
 
 start <- Sys.time()
-B_L1_m <- TBI_test_auto_allp_TBIgenJW_test(rep = 180, path = "/project/6005201/p1092272/Globus"
+B_L1_m <- TBI_test_auto_allp_TBIgenJW_test(rep = 180, path = "/home/p1092272/project/p1092272/Globus/B_L1/output1563381261"
 , scenario = 0,
                                       alpha = c(0.001, 0.0025, 0.005, 0.0075,
                                                 0.01, 0.025, 0.05, 0.075,
