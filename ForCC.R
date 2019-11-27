@@ -14,7 +14,7 @@ source(paste0(dir,"TBI_test_auto_allp_TBIgenJW_test.R"))
 source(paste0(dir,"TBIgenJW_test.R"))
 source(paste0(dir,"Cdmicro2genind.R"))
 
-source("PlotRates.R")
+source(paste0(dir,"PlotRates.R"))
 
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
