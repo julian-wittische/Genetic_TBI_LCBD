@@ -1,17 +1,18 @@
 # Source function which creates TBI input from CDMetaPOP
-source("CD2TBI.R")
+dir <- "/home/p1092272/projects/def-pjames/p1092272/Globus/Genetic_TBI_LCBD/"
+source(paste0(dir,"CD2TBI.R"))
 
 # Source function which computes True Positive Rates and False negative Rates, as well as other
 # confusion matrix-derived indices
 #source("TPR_FNR.R")
-source("TPR_FNR_with_pop_argument.R")
+source(paste0(dir,"TPR_FNR_with_pop_argument.R"))
 
-source("TBI_test_auto_allp.R")
-source("TBI_test_auto_allp_old.R")
-source("TBIold.R")
-source("TBI_test_auto_allp_TBIgenJW_test.R")
-source("TBIgenJW_test.R")
-source("Cdmicro2genind.R")
+source(paste0(dir,"TBI_test_auto_allp.R"))
+source(paste0(dir,"TBI_test_auto_allp_old.R"))
+source(paste0(dir,"TBIold.R"))
+source(paste0(dir,"TBI_test_auto_allp_TBIgenJW_test.R"))
+source(paste0(dir,"TBIgenJW_test.R"))
+source(paste0(dir,"Cdmicro2genind.R"))
 
 source("PlotRates.R")
 
@@ -29,6 +30,7 @@ library(pegas)
 library(hierfstat)
 
 start <- Sys.time()
+print(getwd())
 B_L1_m <- TBI_test_auto_allp_TBIgenJW_test(rep = 180, path = getwd(),
                                       scenario = 0,
                                       alpha = c(0.001, 0.0025, 0.005, 0.0075,
