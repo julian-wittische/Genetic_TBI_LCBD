@@ -61,7 +61,7 @@ p +
   
   scale_x_continuous(limits = c(0, sqrt(4^2+4^2)), breaks=c(0,1,2,3,4,5)) +
   scale_color_manual(name = "Dispersal",
-                     values = c("fun.1" = "violet", "fun.2" = "violetred", "fun.3" = "violetred4"),
+                     values = c("fun.1" = "yellow", "fun.2" = "orange", "fun.3" = "red"),
                      labels = c("Low", "Intermediate", "High")) +
   #geom_vline(xintercept = 1, linetype = "dashed") +
   ylab("Probability of dispersal") +
