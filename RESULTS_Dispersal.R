@@ -1,4 +1,5 @@
 setwd("E:/Globus/RData2")
+#setwd("C:/Users/Field/Documents/Glob")
 
 load_RData <- function(fileName){
   load(fileName)
