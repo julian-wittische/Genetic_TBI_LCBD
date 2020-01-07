@@ -1,82 +1,13 @@
 setwd("E:/Globus/RData2")
 setwd("C:/Users/Field/Documents/Glob")
 
-load_RData <- function(fileName){
-  load(fileName)
-  get(ls()[ls() != "fileName"])
-}
-
-load_perf <- function(scen18, popnum){
-  if(popnum == 1){
-    return(mapply(rbind,
-                  lapply(scen18, function(x) confusion_mat(x[1:30], 1)),
-                  lapply(scen18, function(x) confusion_mat(x[31:60], 2)),
-                  lapply(scen18, function(x) confusion_mat(x[61:90], 3)),
-                  lapply(scen18, function(x) confusion_mat(x[91:120], 7)),
-                  lapply(scen18, function(x) confusion_mat(x[121:150], 8)),
-                  lapply(scen18, function(x) confusion_mat(x[151:180], 13)),
-                  SIMPLIFY=FALSE))
-  }
-  if(popnum == 2){
-    return(mapply(rbind,
-                  lapply(scen18, function(x) confusion_mat(x[1:30],  c(2, 8))),
-                  lapply(scen18, function(x) confusion_mat(x[31:60], c(3, 8))),
-                  lapply(scen18, function(x) confusion_mat(x[61:90], c(3, 13))),
-                  lapply(scen18, function(x) confusion_mat(x[91:120], c(7, 8))),
-                  lapply(scen18, function(x) confusion_mat(x[121:150], c(7, 13))),
-                  lapply(scen18, function(x) confusion_mat(x[151:180], c(8, 13))),
-                  SIMPLIFY=FALSE))
-  }
-  if(popnum == 3){
-    return(mapply(rbind,
-                  lapply(scen18, function(x) confusion_mat(x[1:30],  c(2, 3, 8))),
-                  lapply(scen18, function(x) confusion_mat(x[31:60], c(2, 7, 13))),
-                  lapply(scen18, function(x) confusion_mat(x[61:90], c(2, 8, 13))),
-                  lapply(scen18, function(x) confusion_mat(x[91:120], c(3, 7, 8))),
-                  lapply(scen18, function(x) confusion_mat(x[121:150], c(3, 7, 13))),
-                  lapply(scen18, function(x) confusion_mat(x[151:180], c(7, 8, 13))),
-                  SIMPLIFY=FALSE))
-  }
-  if(popnum == "control"){
-    return(lapply(scen18, function(x)FPR_control(x)))
-  }
-}
-
-sum_perf <- function(laodperfoutput, FPRorFNR="FPR", controlTRUEFALSE=FALSE){
-  if(!controlTRUEFALSE){
-    sapply(laodperfoutput, function(x) mean(x[,FPRorFNR]))
-  } else {
-    sapply(laodperfoutput, mean)
-  }
-}
-
 library(Rmisc)
 
-CI_TBI <- function(x,threshold_number, FPR_or_FNR){
-  sapply(x, function(x) CI(x[,paste(FPR_or_FNR)]))[,threshold_number]
-}
 
 alpha <- c(0.001, 0.0025, 0.005, 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1)
 
-IL1 <- load_perf(load_RData("I_L1_m.RData"), 1)
-IL1b1 <- load_perf(load_RData("I_L1_m1.RData"), 1)
-IL1b2 <- load_perf(load_RData("I_L1_m2.RData"), 1)
-IL1b3 <- load_perf(load_RData("I_L1_m3.RData"), 1)
-IL1b4 <- load_perf(load_RData("I_L1_m4.RData"), 1)
-IL1b5 <- load_perf(load_RData("I_L1_m5.RData"), 1)
-IL1b6 <- load_perf(load_RData("I_L1_m6.RData"), 1)
-IL1b7 <- load_perf(load_RData("I_L1_m7.RData"), 1)
-IL1b8 <- load_perf(load_RData("I_L1_m8.RData"), 1)
-IL1b9 <- load_perf(load_RData("I_L1_m9.RData"), 1)
-IL1a1 <- load_perf(load_RData("I_L1_mp1.RData"), 1)
-IL1a2 <- load_perf(load_RData("I_L1_mp2.RData"), 1)
-IL1a3 <- load_perf(load_RData("I_L1_mp3.RData"), 1)
-IL1a4 <- load_perf(load_RData("I_L1_mp4.RData"), 1)
-IL1a5 <- load_perf(load_RData("I_L1_mp5.RData"), 1)
-IL1a6 <- load_perf(load_RData("I_L1_mp6.RData"), 1)
-IL1a7 <- load_perf(load_RData("I_L1_mp7.RData"), 1)
-IL1a8 <- load_perf(load_RData("I_L1_mp8.RData"), 1)
-IL1a9 <- load_perf(load_RData("I_L1_mp9.RData"), 1)
+
+
 
 before_FPR_L1 <- rbind(CI_TBI(IL1, 7, "FPR"),
                        CI_TBI(IL1b1, 2, "FPR"),   
@@ -100,25 +31,6 @@ before_FNR_L1 <- rbind(CI_TBI(IL1, 7, "FNR"),
                        CI_TBI(IL1b8, 2, "FNR"),
                        CI_TBI(IL1b9, 2, "FNR"))
 ###
-IL2 <- load_perf(load_RData("I_L2_m.RData"), 2)
-IL2b1 <- load_perf(load_RData("I_L2_m1.RData"), 2)
-IL2b2 <- load_perf(load_RData("I_L2_m2.RData"), 2)
-IL2b3 <- load_perf(load_RData("I_L2_m3.RData"), 2)
-IL2b4 <- load_perf(load_RData("I_L2_m4.RData"), 2)
-IL2b5 <- load_perf(load_RData("I_L2_m5.RData"), 2)
-IL2b6 <- load_perf(load_RData("I_L2_m6.RData"), 2)
-IL2b7 <- load_perf(load_RData("I_L2_m7.RData"), 2)
-IL2b8 <- load_perf(load_RData("I_L2_m8.RData"), 2)
-IL2b9 <- load_perf(load_RData("I_L2_m9.RData"), 2)
-IL2a1 <- load_perf(load_RData("I_L2_mp1.RData"), 2)
-IL2a2 <- load_perf(load_RData("I_L2_mp2.RData"), 2)
-IL2a3 <- load_perf(load_RData("I_L2_mp3.RData"), 2)
-IL2a4 <- load_perf(load_RData("I_L2_mp4.RData"), 2)
-IL2a5 <- load_perf(load_RData("I_L2_mp5.RData"), 2)
-IL2a6 <- load_perf(load_RData("I_L2_mp6.RData"), 2)
-IL2a7 <- load_perf(load_RData("I_L2_mp7.RData"), 2)
-IL2a8 <- load_perf(load_RData("I_L2_mp8.RData"), 2)
-IL2a9 <- load_perf(load_RData("I_L2_mp9.RData"), 2)
 
 before_FPR_L2 <- rbind(CI_TBI(IL2, 7, "FPR"),
                        CI_TBI(IL2b1, 2, "FPR"),   
@@ -142,25 +54,7 @@ before_FNR_L2 <- rbind(CI_TBI(IL2, 7, "FNR"),
                        CI_TBI(IL2b8, 2, "FNR"),
                        CI_TBI(IL2b9, 2, "FNR"))
 ###
-IL3 <- load_perf(load_RData("I_L3_m.RData"), 3)
-IL3b1 <- load_perf(load_RData("I_L3_m1.RData"), 3)
-IL3b2 <- load_perf(load_RData("I_L3_m2.RData"), 3)
-IL3b3 <- load_perf(load_RData("I_L3_m3.RData"), 3)
-IL3b4 <- load_perf(load_RData("I_L3_m4.RData"), 3)
-IL3b5 <- load_perf(load_RData("I_L3_m5.RData"), 3)
-IL3b6 <- load_perf(load_RData("I_L3_m6.RData"), 3)
-IL3b7 <- load_perf(load_RData("I_L3_m7.RData"), 3)
-IL3b8 <- load_perf(load_RData("I_L3_m8.RData"), 3)
-IL3b9 <- load_perf(load_RData("I_L3_m9.RData"), 3)
-IL3a1 <- load_perf(load_RData("I_L3_mp1.RData"), 3)
-IL3a2 <- load_perf(load_RData("I_L3_mp2.RData"), 3)
-IL3a3 <- load_perf(load_RData("I_L3_mp3.RData"), 3)
-IL3a4 <- load_perf(load_RData("I_L3_mp4.RData"), 3)
-IL3a5 <- load_perf(load_RData("I_L3_mp5.RData"), 3)
-IL3a6 <- load_perf(load_RData("I_L3_mp6.RData"), 3)
-IL3a7 <- load_perf(load_RData("I_L3_mp7.RData"), 3)
-IL3a8 <- load_perf(load_RData("I_L3_mp8.RData"), 3)
-IL3a9 <- load_perf(load_RData("I_L3_mp9.RData"), 3)
+
 
 before_FPR_L3 <- rbind(CI_TBI(IL3, 7, "FPR"),
                        CI_TBI(IL3b1, 2, "FPR"),   
@@ -185,25 +79,7 @@ before_FNR_L3 <- rbind(CI_TBI(IL3, 7, "FNR"),
                        CI_TBI(IL3b9, 2, "FNR"))
 ####################################################
 
-IM1 <- load_perf(load_RData("I_M1_m.RData"), 1)
-IM1b1 <- load_perf(load_RData("I_M1_m1.RData"), 1)
-IM1b2 <- load_perf(load_RData("I_M1_m2.RData"), 1)
-IM1b3 <- load_perf(load_RData("I_M1_m3.RData"), 1)
-IM1b4 <- load_perf(load_RData("I_M1_m4.RData"), 1)
-IM1b5 <- load_perf(load_RData("I_M1_m5.RData"), 1)
-IM1b6 <- load_perf(load_RData("I_M1_m6.RData"), 1)
-IM1b7 <- load_perf(load_RData("I_M1_m7.RData"), 1)
-IM1b8 <- load_perf(load_RData("I_M1_m8.RData"), 1)
-IM1b9 <- load_perf(load_RData("I_M1_m9.RData"), 1)
-IM1a1 <- load_perf(load_RData("I_M1_mp1.RData"), 1)
-IM1a2 <- load_perf(load_RData("I_M1_mp2.RData"), 1)
-IM1a3 <- load_perf(load_RData("I_M1_mp3.RData"), 1)
-IM1a4 <- load_perf(load_RData("I_M1_mp4.RData"), 1)
-IM1a5 <- load_perf(load_RData("I_M1_mp5.RData"), 1)
-IM1a6 <- load_perf(load_RData("I_M1_mp6.RData"), 1)
-IM1a7 <- load_perf(load_RData("I_M1_mp7.RData"), 1)
-IM1a8 <- load_perf(load_RData("I_M1_mp8.RData"), 1)
-IM1a9 <- load_perf(load_RData("I_M1_mp9.RData"), 1)
+
 
 before_FPR_M1 <- rbind(CI_TBI(IM1, 7, "FPR"),
                        CI_TBI(IM1b1, 2, "FPR"),   
@@ -227,25 +103,7 @@ before_FNR_M1 <- rbind(CI_TBI(IM1, 7, "FNR"),
                        CI_TBI(IM1b8, 2, "FNR"),
                        CI_TBI(IM1b9, 2, "FNR"))
 ###
-IM2 <- load_perf(load_RData("I_M2_m.RData"), 2)
-IM2b1 <- load_perf(load_RData("I_M2_m1.RData"), 2)
-IM2b2 <- load_perf(load_RData("I_M2_m2.RData"), 2)
-IM2b3 <- load_perf(load_RData("I_M2_m3.RData"), 2)
-IM2b4 <- load_perf(load_RData("I_M2_m4.RData"), 2)
-IM2b5 <- load_perf(load_RData("I_M2_m5.RData"), 2)
-IM2b6 <- load_perf(load_RData("I_M2_m6.RData"), 2)
-IM2b7 <- load_perf(load_RData("I_M2_m7.RData"), 2)
-IM2b8 <- load_perf(load_RData("I_M2_m8.RData"), 2)
-IM2b9 <- load_perf(load_RData("I_M2_m9.RData"), 2)
-IM2a1 <- load_perf(load_RData("I_M2_mp1.RData"), 2)
-IM2a2 <- load_perf(load_RData("I_M2_mp2.RData"), 2)
-IM2a3 <- load_perf(load_RData("I_M2_mp3.RData"), 2)
-IM2a4 <- load_perf(load_RData("I_M2_mp4.RData"), 2)
-IM2a5 <- load_perf(load_RData("I_M2_mp5.RData"), 2)
-IM2a6 <- load_perf(load_RData("I_M2_mp6.RData"), 2)
-IM2a7 <- load_perf(load_RData("I_M2_mp7.RData"), 2)
-IM2a8 <- load_perf(load_RData("I_M2_mp8.RData"), 2)
-IM2a9 <- load_perf(load_RData("I_M2_mp9.RData"), 2)
+
 
 before_FPR_M2 <- rbind(CI_TBI(IM2, 7, "FPR"),
                        CI_TBI(IM2b1, 2, "FPR"),   
@@ -269,25 +127,6 @@ before_FNR_M2 <- rbind(CI_TBI(IM2, 7, "FNR"),
                        CI_TBI(IM2b8, 2, "FNR"),
                        CI_TBI(IM2b9, 2, "FNR"))
 ###
-IM3 <- load_perf(load_RData("I_M3_m.RData"), 3)
-IM3b1 <- load_perf(load_RData("I_M3_m1.RData"), 3)
-IM3b2 <- load_perf(load_RData("I_M3_m2.RData"), 3)
-IM3b3 <- load_perf(load_RData("I_M3_m3.RData"), 3)
-IM3b4 <- load_perf(load_RData("I_M3_m4.RData"), 3)
-IM3b5 <- load_perf(load_RData("I_M3_m5.RData"), 3)
-IM3b6 <- load_perf(load_RData("I_M3_m6.RData"), 3)
-IM3b7 <- load_perf(load_RData("I_M3_m7.RData"), 3)
-IM3b8 <- load_perf(load_RData("I_M3_m8.RData"), 3)
-IM3b9 <- load_perf(load_RData("I_M3_m9.RData"), 3)
-IM3a1 <- load_perf(load_RData("I_M3_mp1.RData"), 3)
-IM3a2 <- load_perf(load_RData("I_M3_mp2.RData"), 3)
-IM3a3 <- load_perf(load_RData("I_M3_mp3.RData"), 3)
-IM3a4 <- load_perf(load_RData("I_M3_mp4.RData"), 3)
-IM3a5 <- load_perf(load_RData("I_M3_mp5.RData"), 3)
-IM3a6 <- load_perf(load_RData("I_M3_mp6.RData"), 3)
-IM3a7 <- load_perf(load_RData("I_M3_mp7.RData"), 3)
-IM3a8 <- load_perf(load_RData("I_M3_mp8.RData"), 3)
-IM3a9 <- load_perf(load_RData("I_M3_mp9.RData"), 3)
 
 before_FPR_M3 <- rbind(CI_TBI(IM3, 7, "FPR"),
                        CI_TBI(IM3b1, 2, "FPR"),   
@@ -313,25 +152,7 @@ before_FNR_M3 <- rbind(CI_TBI(IM3, 7, "FNR"),
 
 ################################################
 
-IH1 <- load_perf(load_RData("I_H1_m.RData"), 1)
-IH1b1 <- load_perf(load_RData("I_H1_m1.RData"), 1)
-IH1b2 <- load_perf(load_RData("I_H1_m2.RData"), 1)
-IH1b3 <- load_perf(load_RData("I_H1_m3.RData"), 1)
-IH1b4 <- load_perf(load_RData("I_H1_m4.RData"), 1)
-IH1b5 <- load_perf(load_RData("I_H1_m5.RData"), 1)
-IH1b6 <- load_perf(load_RData("I_H1_m6.RData"), 1)
-IH1b7 <- load_perf(load_RData("I_H1_m7.RData"), 1)
-IH1b8 <- load_perf(load_RData("I_H1_m8.RData"), 1)
-IH1b9 <- load_perf(load_RData("I_H1_m9.RData"), 1)
-IH1a1 <- load_perf(load_RData("I_H1_mp1.RData"), 1)
-IH1a2 <- load_perf(load_RData("I_H1_mp2.RData"), 1)
-IH1a3 <- load_perf(load_RData("I_H1_mp3.RData"), 1)
-IH1a4 <- load_perf(load_RData("I_H1_mp4.RData"), 1)
-IH1a5 <- load_perf(load_RData("I_H1_mp5.RData"), 1)
-IH1a6 <- load_perf(load_RData("I_H1_mp6.RData"), 1)
-IH1a7 <- load_perf(load_RData("I_H1_mp7.RData"), 1)
-IH1a8 <- load_perf(load_RData("I_H1_mp8.RData"), 1)
-IH1a9 <- load_perf(load_RData("I_H1_mp9.RData"), 1)
+
 
 before_FPR_H1 <- rbind(CI_TBI(IH1, 7, "FPR"),
                        CI_TBI(IH1b1, 2, "FPR"),   
@@ -355,25 +176,7 @@ before_FNR_H1 <- rbind(CI_TBI(IH1, 7, "FNR"),
                        CI_TBI(IH1b8, 2, "FNR"),
                        CI_TBI(IH1b9, 2, "FNR"))
 ###
-IH2 <- load_perf(load_RData("I_H2_m.RData"), 2)
-IH2b1 <- load_perf(load_RData("I_H2_m1.RData"), 2)
-IH2b2 <- load_perf(load_RData("I_H2_m2.RData"), 2)
-IH2b3 <- load_perf(load_RData("I_H2_m3.RData"), 2)
-IH2b4 <- load_perf(load_RData("I_H2_m4.RData"), 2)
-IH2b5 <- load_perf(load_RData("I_H2_m5.RData"), 2)
-IH2b6 <- load_perf(load_RData("I_H2_m6.RData"), 2)
-IH2b7 <- load_perf(load_RData("I_H2_m7.RData"), 2)
-IH2b8 <- load_perf(load_RData("I_H2_m8.RData"), 2)
-IH2b9 <- load_perf(load_RData("I_H2_m9.RData"), 2)
-IH2a1 <- load_perf(load_RData("I_H2_mp1.RData"), 2)
-IH2a2 <- load_perf(load_RData("I_H2_mp2.RData"), 2)
-IH2a3 <- load_perf(load_RData("I_H2_mp3.RData"), 2)
-IH2a4 <- load_perf(load_RData("I_H2_mp4.RData"), 2)
-IH2a5 <- load_perf(load_RData("I_H2_mp5.RData"), 2)
-IH2a6 <- load_perf(load_RData("I_H2_mp6.RData"), 2)
-IH2a7 <- load_perf(load_RData("I_H2_mp7.RData"), 2)
-IH2a8 <- load_perf(load_RData("I_H2_mp8.RData"), 2)
-IH2a9 <- load_perf(load_RData("I_H2_mp9.RData"), 2)
+
 
 before_FPR_H2 <- rbind(CI_TBI(IH2, 7, "FPR"),
                        CI_TBI(IH2b1, 2, "FPR"),   
@@ -397,25 +200,7 @@ before_FNR_H2 <- rbind(CI_TBI(IH2, 7, "FNR"),
                        CI_TBI(IH2b8, 2, "FNR"),
                        CI_TBI(IH2b9, 2, "FNR"))
 ###
-IH3 <- load_perf(load_RData("I_H3_m.RData"), 3)
-IH3b1 <- load_perf(load_RData("I_H3_m1.RData"), 3)
-IH3b2 <- load_perf(load_RData("I_H3_m2.RData"), 3)
-IH3b3 <- load_perf(load_RData("I_H3_m3.RData"), 3)
-IH3b4 <- load_perf(load_RData("I_H3_m4.RData"), 3)
-IH3b5 <- load_perf(load_RData("I_H3_m5.RData"), 3)
-IH3b6 <- load_perf(load_RData("I_H3_m6.RData"), 3)
-IH3b7 <- load_perf(load_RData("I_H3_m7.RData"), 3)
-IH3b8 <- load_perf(load_RData("I_H3_m8.RData"), 3)
-IH3b9 <- load_perf(load_RData("I_H3_m9.RData"), 3)
-IH3a1 <- load_perf(load_RData("I_H3_mp1.RData"), 3)
-IH3a2 <- load_perf(load_RData("I_H3_mp2.RData"), 3)
-IH3a3 <- load_perf(load_RData("I_H3_mp3.RData"), 3)
-IH3a4 <- load_perf(load_RData("I_H3_mp4.RData"), 3)
-IH3a5 <- load_perf(load_RData("I_H3_mp5.RData"), 3)
-IH3a6 <- load_perf(load_RData("I_H3_mp6.RData"), 3)
-IH3a7 <- load_perf(load_RData("I_H3_mp7.RData"), 3)
-IH3a8 <- load_perf(load_RData("I_H3_mp8.RData"), 3)
-IH3a9 <- load_perf(load_RData("I_H3_mp9.RData"), 3)
+
 
 before_FPR_H3 <- rbind(CI_TBI(IH3, 7, "FPR"),
                        CI_TBI(IH3b1, 2, "FPR"),   

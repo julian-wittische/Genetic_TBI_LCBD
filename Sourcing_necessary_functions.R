@@ -1,32 +1,32 @@
-# Reading the source files
+# Sourcing functions and loading packages
 # Julian Wittische 
-# July 2019
+# December 2019
 
-
-#setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
+setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
 
 # Source script to install and load necessary packages
 source("Installing_missing_packages.R")
 
-# Source function which creates TBI input from CDMetaPOP
-source("CD2TBI.R")
+# Source function which creates TBI input (using adegenet) from CDMetaPOP output
+source("Cdmicro2genind.R")
+
+# Source TGI function
+source("TBIgenJW_test.R")
+
+# Source function which automatize TGI across replicates
+source("TBI_test_auto_allp_TBIgenJW_test.R")
 
 # Source function which computes True Positive Rates and False negative Rates, as well as other
 # confusion matrix-derived indices
-#source("TPR_FNR.R")
 source("TPR_FNR_with_pop_argument.R")
 
-source("TBI_test_auto_allp.R")
-source("TBI_test_auto_allp_old.R")
-source("TBIold.R")
-source("TBI_test_auto_allp_TBIgenJW_test.R")
-source("TBIgenJW_test.R")
-source("Cdmicro2genind.R")
+# Source functions to extract perf
+source("Performances.R")
 
-source("PlotRates.R")
-
+# Useful
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
+# Loading necessary packages (not sure all are still necessary)
 library(gtools)
 library(adespatial)
 library(vegan)
@@ -37,3 +37,4 @@ library(extrafont)
 library(adegenet)
 library(pegas)
 library(hierfstat)
+library(colorspace)
