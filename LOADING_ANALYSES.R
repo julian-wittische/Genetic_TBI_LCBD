@@ -194,6 +194,6 @@ IH3a8 <- load_perf(load_RData("I_H3_mp8.RData"), 3)
 IH3a9 <- load_perf(load_RData("I_H3_mp9.RData"), 3)
 
 #
-CL <- load_RData("C_L_m.RData")
-CM <- load_RData("C_M_m.RData")
-CH <- load_RData("C_H_m.RData")
+CL <- load_perf(load_RData("C_L_m.RData"), "control")
+CM <- load_perf(load_RData("C_M_m.RData"), "control")
+CH <- load_perf(load_RData("C_H_m.RData"), "control")

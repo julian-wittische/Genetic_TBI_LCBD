@@ -43,11 +43,11 @@ load_perf <- function(scen18, popnum){
   }
 }
 
-sum_perf <- function(laodperfoutput, FPRorFNR="FPR", controlTRUEFALSE=FALSE){
+sum_perf <- function(laodperfoutput, FPRorFNR="FPR", controlTRUEFALSE=FALSE){ #j'ai changé mean vers CI et t()
   if(!controlTRUEFALSE){
-    sapply(laodperfoutput, function(x) mean(x[,FPRorFNR]))
+    t(sapply(laodperfoutput, function(x) CI(x[,FPRorFNR])))
   } else {
-    sapply(laodperfoutput, mean)
+    t(sapply(laodperfoutput, CI))
   }
 }
 
