@@ -28,7 +28,7 @@ dfFPR_I <- data.frame(alpha,
                       IH3=sum_perf(IH3, "FPR"),
                       CL=sum_perf(CL, "FPR", TRUE),
                       CM=sum_perf(CM, "FPR", TRUE),
-                      CH=sum_perf(CH, "FPR", TRUE)/5) #CHANGER
+                      CH=sum_perf(CH, "FPR", TRUE)) #CHANGER
 
 dfFNR_I <- data.frame(alpha,
                       IL1=sum_perf(IL1, "FNR"),
@@ -192,3 +192,45 @@ ggplot(dfFPR_I, aes(alpha)) +
                      values = c("pch1" = 17, "pch2" = 15, "pch3" = 19, "pch4" = 3),
                      labels = c("1","2","3", "0 (with dashed line)"))
 ##############################################################################################
+ggplot(dfFPR_I, aes(alpha)) + 
+  
+  geom_line(aes(y = IH1.mean,  color ="col3"), size=sz2) +
+  geom_line(aes(y = IH2.mean,  color ="col3"), size=sz2) +
+  geom_line(aes(y = IH3.mean,  color ="col3"), size=sz2) +
+  geom_line(aes(y = CH.mean),  color =col3, size=sz2, linetype = "dashed") +
+  
+  geom_point(aes(y = IH1.mean, pch = "pch1"),  color =col3, size=sz) +
+  geom_point(aes(y = IH2.mean, pch = "pch2"),  color =col3, size=sz) +
+  geom_point(aes(y = IH3.mean, pch = "pch3"),  color =col3, size=sz) +
+  geom_point(aes(y = CH.mean,  pch = "pch4"),  color =col3, size=sz) + # fill=col3,
+  
+  geom_errorbar(aes(ymin = IH1.lower, ymax = IH1.upper), width= widtherr ,  color =col3, size=sz3) +
+  geom_errorbar(aes(ymin = IH2.lower, ymax = IH2.upper), width= widtherr ,  color =col3, size=sz3) +
+  geom_errorbar(aes(ymin = IH3.lower, ymax = IH3.upper), width= widtherr ,  color =col3,  size=sz3) +
+  geom_errorbar(aes(ymin = CH.lower, ymax = CH.upper), width= widtherr ,  color =col3,  size=sz3) +
+  
+  theme(text=element_text(size=12,  family="serif")) +
+  labs(fill = "scenario") +
+  ylab("FPR") +
+  xlab("Threshold") +
+  
+  scale_color_manual(name = "Dispersal",
+                     values = c( "col3" = "black"),
+                     labels = c("high")) +
+  
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
+  
+  theme(legend.key=element_blank()) +
+  
+  scale_shape_manual(name = "Number of affected populations",
+                     values = c("pch1" = 17, "pch2" = 15, "pch3" = 19, "pch4" = 3),
+                     labels = c("1","2","3", "0 (with dashed line)"))
+##############################################################################################
+IH1[[9]]$FPR
+IH2[[9]]$FPR
+IH3[[9]]$FPR
+CH[[9]]
+chisq.test(CH[[9]], IH1[[9]]$FPR)
+chisq.test(CH[[9]], IH2[[9]]$FPR)
+chisq.test(CH[[9]], IH3[[9]]$FPR)
