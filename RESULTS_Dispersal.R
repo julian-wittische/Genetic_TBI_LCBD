@@ -46,15 +46,27 @@ dfcontrol <- data.frame(alpha,
                         CM=sum_perf(CM, "FPR", TRUE),
                         CH=sum_perf(CH, "FPR", TRUE))
 
-L005N <- dfFNR_I[7, c(3, 6, 9)]
-M005N <- dfFNR_I[7, c(12, 15, 18)]
-H005N <- dfFNR_I[7, c(21, 24, 27)]
-L005N
-M005N
-H005N
 rowMeans(L005N)
 rowMeans(M005N)
 rowMeans(H005N)
+L005N <- dfFNR_I[7, c(3, 6, 9)]
+M005N <- dfFNR_I[7, c(12, 15, 18)]
+H005N <- dfFNR_I[7, c(21, 24, 27)]
+L005Nlow <- dfFNR_I[7, c(4, 7, 10)]
+M005Nlow <- dfFNR_I[7, c(13, 16, 19)]
+H005Nlow <- dfFNR_I[7, c(22, 25, 28)]
+L005Nup <- dfFNR_I[7, c(2, 5, 8)]
+M005Nup <- dfFNR_I[7, c(11, 14, 17)]
+H005Nup <- dfFNR_I[7, c(20, 23, 26)]
+rowMeans(L005N)
+rowMeans(M005N)
+rowMeans(H005N)
+rowMeans(L005Nlow)
+rowMeans(M005Nlow)
+rowMeans(H005Nlow)
+rowMeans(L005Nup)
+rowMeans(M005Nup)
+rowMeans(H005Nup)
 
 L005P <- dfFPR_I[7, c(3, 6, 9)]
 M005P <- dfFPR_I[7, c(12, 15, 18)]
@@ -234,3 +246,11 @@ CH[[9]]
 chisq.test(CH[[9]], IH1[[9]]$FPR)
 chisq.test(CH[[9]], IH2[[9]]$FPR)
 chisq.test(CH[[9]], IH3[[9]]$FPR)
+
+sum_perf(Map(rbind, IL1, IL2, IL3), "FNR")
+sum_perf(Map(rbind, IM1, IM2, IM3), "FNR")
+sum_perf(Map(rbind, IH1, IH2, IH3), "FNR")
+
+sum_perf(Map(rbind, IL1, IL2, IL3), "FPR")
+sum_perf(Map(rbind, IM1, IM2, IM3), "FPR")
+sum_perf(Map(rbind, IH1, IH2, IH3), "FPR")
