@@ -30,13 +30,30 @@ goby <- genepop.to.genind("GobyCombined.genepop2.txt")
 table(goby@pop)
 
 goby_first <- goby
-goby_first[goby_first@pop %in% c("TS99-48", "ERL99", "ERL06", "STN90-19", "STN06", "BIG06", " MCD99-40",
-                                 "MCD06", "ELK06" )]
-
-c("TS99-48", "ERL99", "ERL06", "STN90-19", "STN06", "BIG06", " MCD99-40", "MCD06", "ELK06" )
-#lonely: AWP09, AWR10, "GAN06", PND06, JAC06,  JAC10, ROK10, WDC06, "WHS06", 
-
 goby_second <- goby
-goby_second[goby_second@pop %in% c("TS11", "ERL10", "ERL11", "STN06", "STN10 ", "STN11", "BIG10","BIG11",
-                                   "MCD10", "MCD11", "ELK11a", "ELK11b")]
+
+first <- c("ERL06", "BIG06", "MCD06", "PUD06", "VRG06", "ELK06", "EEL06", "WHS06")
+
+second <- c("ERL10", "ERL11", "BIG10", "BIG11", "MCD10", "MCD11", "PUD10", "VRG10", "ELK11a",
+            "ELK11b", "EEL10", "SAL11a", "SAL11b")
+
+goby_first <- goby_first[goby_first@pop %in% first]
+goby_first@pop
+
+goby_second <- goby_second[goby_second@pop %in% second]
+goby_second@pop
+
+goby_first@pop <- as.factor(gsub("[[:lower:][:digit:]]","", goby_first@pop))
+goby_second@pop <- as.factor(gsub("[[:lower:][:digit:]]","", goby_second@pop))
+levels(goby_second@pop) <- c(levels(goby_second@pop), "WHS")
+goby_second@pop[which(goby_second@pop=="SAL")] <- "WHS"
+droplevels(goby_second@pop)
+
+goby_first_genpop <- genind2genpop(goby_first)
+goby_second_genpop <- genind2genpop(goby_second)
+
+goby_test <- TBIgenJW_test(goby_first_genpop, goby_second_genpop)
+
+
+
 
