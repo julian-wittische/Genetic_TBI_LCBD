@@ -42,7 +42,8 @@ CDmicro2genpop <- function(replicate, timestep, scenario = 0, nloci = 10, nallel
   genloc <- as.loci(genprep)
   gen <- loci2genind(genloc)
   pop(gen) <- as.factor(input[,17])
-  genp <- genind2genpop(gen)
-  genp <- genp[,order(colnames(genp@tab))]
-  return(genp)
+  # genp <- genind2genpop(gen)
+  # genp <- genp[,order(colnames(genp@tab))]
+  # return(genp)
+  return(gen) #MODIF
 }

@@ -47,13 +47,14 @@ goby_first@pop <- as.factor(gsub("[[:lower:][:digit:]]","", goby_first@pop))
 goby_second@pop <- as.factor(gsub("[[:lower:][:digit:]]","", goby_second@pop))
 levels(goby_second@pop) <- c(levels(goby_second@pop), "WHS")
 goby_second@pop[which(goby_second@pop=="SAL")] <- "WHS"
-droplevels(goby_second@pop)
+goby_second@pop <- droplevels(goby_second@pop)
 
 goby_first_genpop <- genind2genpop(goby_first)
 goby_second_genpop <- genind2genpop(goby_second)
 
-goby_test <- TBIgenJW_test(goby_first_genpop, goby_second_genpop)
-
-
+goby_test <- TBIgenJW_test(goby_first_genpop, goby_second_genpop, nperm = 99)
+goby_test
+goby_test_notgenpop <- TGI(goby_first, goby_second, nperm = 99)
+goby_test_notgenpop
 
 
