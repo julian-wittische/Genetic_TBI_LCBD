@@ -1,17 +1,3 @@
-# genepop.to.genind
-
-#' Imports a \code{.txt} file in \code{GenePop} format into an object of type \code{genind}
-
-#' 
-#' The main work is done by the function \code{adegenet::read.genepop}. However, that function requires text files with an extension of \code{.gen}, whereas such files usually have extension \code{.txt}. The sole purpose of this function is to work around the \dQuote{.gen} requirement.
-#' 
-#' @param name the name of a file in \code{GenePop} format
-#' @param quiet whether a conversion message should be printed
-#' @param ncode Set to the number of characters per allele name
-#' 
-#' @return an object of class \code{genind}
-#' 
-#' @export
 genepop.to.genind <- function(name, quiet = TRUE, ncode = 3) {
   if (requireNamespace("adegenet")) {
     tempfile <- file(name)
@@ -52,9 +38,11 @@ goby_second@pop <- droplevels(goby_second@pop)
 goby_first_genpop <- genind2genpop(goby_first)
 goby_second_genpop <- genind2genpop(goby_second)
 
-goby_test <- TBIgenJW_test(goby_first_genpop, goby_second_genpop, nperm = 99)
-goby_test
-goby_test_notgenpop <- TGI(goby_first, goby_second, nperm = 99)
+# goby_test <- TBIgenJW_test(goby_first_genpop, goby_second_genpop, nperm = 99)
+# goby_test
+
+goby_test_notgenpop <- TGI(goby_first, goby_second, nperm = 999, method = 3)
 goby_test_notgenpop
 
-
+goby_test_notgenpop.randmethod2 <- TGI2(goby_first, goby_second, nperm = 999, method = 3)
+goby_test_notgenpop.randmethod2

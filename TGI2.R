@@ -1,4 +1,6 @@
-TGI <- function (mat1, mat2, nperm = 999, replace = FALSE, seed. = NULL, method = 4, correc = "holm", thresh_for_GL = 0.1) {
+library(poppr)
+
+TGI2 <- function (mat1, mat2, nperm = 999, replace = FALSE, seed. = NULL, method = 4, correc = "holm", thresh_for_GL = 0.05) {
   
   #### genind to genpop objects
   
@@ -53,11 +55,11 @@ TGI <- function (mat1, mat2, nperm = 999, replace = FALSE, seed. = NULL, method 
       
       set.seed(my.vec[iperm])
       mat1.perm <- mat1p
-      mat1.perm@tab <- apply(mat1.perm@tab, 2, sample, replace = replace)
+      mat1.perm <- shufflepop(mat1.perm, method=4)
       
       set.seed(my.vec[iperm])
       mat2.perm <- mat2p
-      mat2.perm@tab <- apply(mat2.perm@tab, 2, sample, replace = replace)
+      mat2.perm <- shufflepop(mat2.perm, method=4)
       
       tmp <- dissim(mat1.perm, mat2.perm, method)
       
@@ -76,16 +78,16 @@ TGI <- function (mat1, mat2, nperm = 999, replace = FALSE, seed. = NULL, method 
   
   n.pop1 <- seppop(mat1)
   n.pop2 <- seppop(mat2)
-
+  
   mean.hexp1 <- do.call("c", lapply(n.pop1, function(x) mean(summary(x)$Hexp)))
   mean.hexp2 <- do.call("c", lapply(n.pop2, function(x) mean(summary(x)$Hexp)))
-
+  
   mean.hexp1[is.nan(mean.hexp1)] <- NA
   mean.hexp2[is.nan(mean.hexp2)] <- NA
   
   simple_diff <- mean.hexp2 - mean.hexp1
   
-  output <- list(TBI = dis.ref, p.TBI = p.dist, p.adj = p.adj, gainloss = simple_diff[p.dist < thresh_for_GL])
+  output <- list(TBI = dis.ref, p.TBI = p.dist, p.adj = p.adj, gainloss = simple_diff[p.adj < thresh_for_GL])
   
   class(output) <- "TGI"
   

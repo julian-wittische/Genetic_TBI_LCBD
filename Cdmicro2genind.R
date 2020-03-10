@@ -10,7 +10,7 @@
 # Replicate IDs start with 0
 # scenario 0 is bottleneck, scenario 1 is massive migration (25 vs 26 populations)
 
-CDmicro2genpop <- function(replicate, timestep, scenario = 0, nloci = 10, nalleles = 10){
+CDmicro2genind <- function(replicate, timestep, scenario = 1, nloci = 10, nalleles = 10){
 
   # Get path for subdir associated with chosen replicate
   repl <<-gtools::mixedsort(list.dirs(getwd()))[replicate+2] #+2 bc 1 summary file
@@ -45,5 +45,8 @@ CDmicro2genpop <- function(replicate, timestep, scenario = 0, nloci = 10, nallel
   # genp <- genind2genpop(gen)
   # genp <- genp[,order(colnames(genp@tab))]
   # return(genp)
+  if (scenario==1) {
+    gen <- gen[gen@pop!="26"]]
+  } 
   return(gen) #MODIF
 }

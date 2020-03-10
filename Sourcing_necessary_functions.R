@@ -11,7 +11,10 @@ source("Installing_missing_packages.R")
 source("Cdmicro2genind.R")
 
 # Source TGI function
-source("TBIgenJW_test.R")
+source("TBIgenJW_test.R") #oldest
+source("TBIgenJW_test2.R") #old
+source("TGI.R") #old
+source("TGI2.R") #new/best
 
 # Source function which automatize TGI across replicates
 source("TBI_test_auto_allp_TBIgenJW_test.R")
