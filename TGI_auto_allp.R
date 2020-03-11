@@ -25,6 +25,7 @@ TGI_auto_allp <- function(earliest = 100, latest = 101,
   pro <- txtProgressBar(max = rep, style = 3)
   
   POS <- lapply(vector("list", length = length(alpha)), function(x) x <- vector("list", length = rep))
+  POS2 <- lapply(vector("list", length = length(alpha)), function(x) x <- vector("list", length = rep))
   
   for (i in 0:(rep-1)) {
     test <- TGI2(CDmicro2genind(i, earliest, scenario = scenario, nloci = nloci, nalleles = nalleles),
@@ -36,6 +37,8 @@ TGI_auto_allp <- function(earliest = 100, latest = 101,
     for (j in 1:length(alpha)) {
       pop <- which(test$p.TBI < alpha[j]) #NEXT: change TBI for adj
       POS[[j]][[i+1]] <- pop
+      pop2 <- which(test$p.adj < alpha[j])
+      POS[[j]][[i+1]] <- pop2
       #print(paste("Which alpha ", alpha[j], sep=""))
     }
     
@@ -43,7 +46,7 @@ TGI_auto_allp <- function(earliest = 100, latest = 101,
     
   }
   
-  return(POS)
+  return(list(POS, POS2))
   
 }
 ############################################################################################################
