@@ -46,7 +46,7 @@ CDmicro2genind <- function(replicate, timestep, scenario = 1, nloci = 10, nallel
   # genp <- genp[,order(colnames(genp@tab))]
   # return(genp)
   if (scenario==1) {
-    gen <- gen[gen@pop!="26"]]
+    gen <- gen[gen@pop!="26"]
   } 
   return(gen) #MODIF
 }
