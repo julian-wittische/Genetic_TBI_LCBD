@@ -11,7 +11,12 @@ list.of.packages <- c("gtools",
                       "reshape2",
                       "cowplot",
                       "extrafont",
-                      "adegenet")
+                      "adegenet",
+                      "pegas",
+                      "hierfstat",
+                      "colorspace",
+                      "Rmisc",
+                      "poppr")
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 new.packages
