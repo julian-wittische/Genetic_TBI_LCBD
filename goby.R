@@ -1,3 +1,5 @@
+setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
+
 genepop.to.genind <- function(name, quiet = TRUE, ncode = 3) {
   if (requireNamespace("adegenet")) {
     tempfile <- file(name)
@@ -40,9 +42,15 @@ goby_second_genpop <- genind2genpop(goby_second)
 
 # goby_test <- TBIgenJW_test(goby_first_genpop, goby_second_genpop, nperm = 99)
 # goby_test
+# 
+# goby_test_notgenpop <- TGI(goby_first, goby_second, nperm = 999, method = 3)
+# goby_test_notgenpop
 
-goby_test_notgenpop <- TGI(goby_first, goby_second, nperm = 999, method = 3)
-goby_test_notgenpop
+goby_test_notgenpop.randmethod3 <- TGI2(goby_first, goby_second, nperm = 999, method = 3)
+goby_test_notgenpop.randmethod3
 
-goby_test_notgenpop.randmethod2 <- TGI2(goby_first, goby_second, nperm = 999, method = 3)
-goby_test_notgenpop.randmethod2
+goby_test_notgenpop.randmethod4 <- TGI2(goby_first, goby_second, nperm = 999, method = 4)
+goby_test_notgenpop.randmethod4
+
+goby_test_notgenpop.randmethod4 <- TGI2(goby_first, goby_second, nperm = 9999, method = 4)
+goby_test_notgenpop.randmethod4

@@ -18,6 +18,7 @@ source("TGI2.R") #new/best
 
 # Source function which automatize TGI across replicates
 source("TBI_test_auto_allp_TBIgenJW_test.R")
+source("TGI_auto_allp.R")
 
 # Source function which computes True Positive Rates and False negative Rates, as well as other
 # confusion matrix-derived indices
