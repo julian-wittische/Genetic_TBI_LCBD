@@ -16,9 +16,8 @@ CL <- load_perf(load_RData("C_L_m_new2.RData"), "control")[6:21]
 CM <- load_perf(load_RData("C_M_m_new2.RData"), "control")[6:21]
 CH <- load_perf(load_RData("C_H_m_new2.RData"), "control")[6:21]
 
-alpha <- c(0.025, 0.030, 0.035, 0.040, 0.045, 0.050, 0.055,
-           0.060, 0.065, 0.070, 0.075, 0.080, 0.085, 0.090, 0.095, 0.100)
-#0.001, 0.005, 0.010, 0.015, 0.020,
+alpha <- c(0.0001, 0.001, 0.005, 0.01, 0.015, 0.020, 0.025, 0.030, 0.035, 0.040, 0.045,
+           0.050, 0.055, 0.060, 0.065, 0.070, 0.075, 0.080, 0.085, 0.090, 0.095, 0.1)
 
 dfFPR_I <- data.frame(alpha,
                       IL1=sum_perf(IL1_new, "FPR"),

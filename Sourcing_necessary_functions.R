@@ -1,6 +1,6 @@
 # Sourcing functions and loading packages
 # Julian Wittische 
-# December 2019
+# July 2020
 
 setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
 

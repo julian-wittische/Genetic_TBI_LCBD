@@ -63,8 +63,8 @@ p +
         legend.key = element_rect(fill = NA)) +
     scale_x_continuous(limits = c(0, sqrt(4^2+4^2)), breaks=c(0,1,2,3,4,5)) +
   scale_color_manual(name = "Dispersal",
-                     values = c("fun.1" = "gray85", "fun.2" = "gray50", "fun.3" = "black"),
-                     labels = c("Low", "Moderate", "High")) +
+                     values = c("fun.1" = "cyan", "fun.2" = "red", "fun.3" = "black"),
+                     labels = c("low (L)", "moderate (M)", "high (H)")) +
   #geom_vline(xintercept = 1, linetype = "dashed") +
   ylab("Probability of dispersal") +
   xlab("Distance from home population") +

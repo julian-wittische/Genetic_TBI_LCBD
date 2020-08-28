@@ -1,9 +1,10 @@
-setwd("E:/Globus/RData2")
+# setwd("E:/Globus/RData2")
 # setwd("C:/Users/Field/Documents/Glob")
 
 library(Rmisc)
 
-alpha <- c(0.001, 0.0025, 0.005, 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1)
+alpha <- c(0.0001, 0.001, 0.005, 0.01, 0.015, 0.020, 0.025, 0.030, 0.035, 0.040, 0.045,
+           0.050, 0.055, 0.060, 0.065, 0.070, 0.075, 0.080, 0.085, 0.090, 0.095, 0.1)
 
 ##############################################################################################
 dfFNR_before <- data.frame(years=-9:0,
@@ -57,8 +58,8 @@ sz <- 3
 sz2 <- 1
 sz3 <-0.5
 widtherr <- 0.25
-col1 <- "gray85"
-col2 <- "gray50"
+col1 <- "cyan"
+col2 <- "red"
 col3 <- "black"
 
 ##############################################################################################
@@ -101,15 +102,15 @@ ggplot(dfFNR_I_time, aes(years)) +
   xlab("Time lag relative to the sampling closest to the event (generations)") +
   
   scale_color_manual(name = "Dispersal",
-                     values = c("col1" = "gray85", "col2" = "gray50", "col3" = "black"),
-                     labels = c("low", "moderate", "high")) +
+                     values = c("col1" = "cyan", "col2" = "red", "col3" = "black"),
+                     labels = c("low (L)", "moderate (M)", "high (H)")) +
   
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   
   theme(legend.key=element_blank()) +
   
-  scale_shape_manual(name = "Number of populations",
+  scale_shape_manual(name = "Number of pop.",
                      values = c("pch1" = 17, "pch2" = 15, "pch3" = 19),
                      labels = c("1","2","3")) +
   geom_vline(xintercept=0, linetype="dashed")
@@ -153,15 +154,15 @@ ggplot(dfFPR_I_time, aes(years)) +
   xlab("Time lag relative to the sampling closest to the event (generations)") +
   
   scale_color_manual(name = "Dispersal",
-                     values = c("col1" = "gray85", "col2" = "gray50", "col3" = "black"),
-                     labels = c("low", "moderate", "high")) +
+                     values = c("col1" = "cyan", "col2" = "red", "col3" = "black"),
+                     labels = c("low (L)", "moderate (M)", "high (H)")) +
   
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   
   theme(legend.key=element_blank()) +
   
-  scale_shape_manual(name = "Number of populations",
+  scale_shape_manual(name = "Number of pop.",
                      values = c("pch1" = 17, "pch2" = 15, "pch3" = 19),
                      labels = c("1","2","3")) +
   geom_vline(xintercept=0, linetype="dashed")
