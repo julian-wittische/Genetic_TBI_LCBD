@@ -144,60 +144,60 @@ ggplot(dfFNR_I, aes(alpha)) +
                      values = c("pch1" = 17, "pch2" = 15, "pch3" = 19),
                      labels = c("1","2","3"))
 
-##############################################################################################
-# To zoom in beyond 1 values
-dfFNR_I_no1s <- dfFNR_I[2:21,]
-ggplot(dfFNR_I_no1s, aes(alpha)) + 
-  
-  geom_line(aes(y = IL1.mean,  color ="col1"), size=sz2) +
-  geom_line(aes(y = IL2.mean,  color ="col1"), size=sz2) +
-  geom_line(aes(y = IL3.mean,  color ="col1"), size=sz2) +
-  geom_line(aes(y = IM1.mean,  color ="col2"), size=sz2) +
-  geom_line(aes(y = IM2.mean,  color ="col2"), size=sz2) +
-  geom_line(aes(y = IM3.mean,  color ="col2"), size=sz2) +
-  geom_line(aes(y = IH1.mean,  color ="col3"), size=sz2) +
-  geom_line(aes(y = IH2.mean,  color ="col3"), size=sz2) +
-  geom_line(aes(y = IH3.mean,  color ="col3"), size=sz2) +
-  
-  geom_point(aes(y = IL1.mean, pch = "pch1"),  color =col1, size=sz) +
-  geom_point(aes(y = IL2.mean, pch = "pch2"),  color =col1, size=sz) +
-  geom_point(aes(y = IL3.mean, pch = "pch3"),  color =col1, size=sz) +
-  geom_point(aes(y = IM1.mean, pch = "pch1"),  color =col2, size=sz) +
-  geom_point(aes(y = IM2.mean, pch = "pch2"),  color =col2, size=sz) +
-  geom_point(aes(y = IM3.mean, pch = "pch3"),  color =col2, size=sz) +
-  geom_point(aes(y = IH1.mean, pch = "pch1"),  color =col3, size=sz) +
-  geom_point(aes(y = IH2.mean, pch = "pch2"),  color =col3, size=sz) +
-  geom_point(aes(y = IH3.mean, pch = "pch3"),  color =col3, size=sz) +
-  
-  geom_errorbar(aes(ymin = IL1.lower, ymax = IL1.upper), width= widtherr ,  color = col1, size=sz3) +
-  geom_errorbar(aes(ymin = IL2.lower, ymax = IL2.upper), width= widtherr ,  color =col1, size=sz3) +
-  geom_errorbar(aes(ymin = IL3.lower, ymax = IL3.upper), width= widtherr ,  color =col1, size=sz3) +
-  geom_errorbar(aes(ymin = IM1.lower, ymax = IM1.upper), width= widtherr ,  color =col2, size=sz3) +
-  geom_errorbar(aes(ymin = IM2.lower, ymax = IM2.upper), width= widtherr ,  color =col2, size=sz3) +
-  geom_errorbar(aes(ymin = IM3.lower, ymax = IM3.upper), width= widtherr ,  color =col2, size=sz3) +
-  geom_errorbar(aes(ymin = IH1.lower, ymax = IH1.upper), width= widtherr ,  color =col3, size=sz3) +
-  geom_errorbar(aes(ymin = IH2.lower, ymax = IH2.upper), width= widtherr ,  color =col3, size=sz3) +
-  geom_errorbar(aes(ymin = IH3.lower, ymax = IH3.upper), width= widtherr ,  color =col3,  size=sz3) +
-  
-  theme(text=element_text(size=12,  family="serif")) +
-  labs(fill = "scenario") +
-  ylab("FNR") +
-  xlab("Threshold") +
-  
-  scale_color_manual(name = "Dispersal",
-                     values = c("col1" = "cyan", "col2" = "red", "col3" = "black"),
-                     labels = c("low (L)", "moderate (M)", "high (H)")) +
-  
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
-  
-  theme(legend.key=element_blank()) +
-  
-  scale_shape_manual(name = "Number of pop.",
-                     values = c("pch1" = 17, "pch2" = 15, "pch3" = 19),
-                     labels = c("1","2","3"))
-
-##############################################################################################
+# ##############################################################################################
+# # To zoom in beyond 1 values
+# dfFNR_I_no1s <- dfFNR_I[2:21,]
+# ggplot(dfFNR_I_no1s, aes(alpha)) + 
+#   
+#   geom_line(aes(y = IL1.mean,  color ="col1"), size=sz2) +
+#   geom_line(aes(y = IL2.mean,  color ="col1"), size=sz2) +
+#   geom_line(aes(y = IL3.mean,  color ="col1"), size=sz2) +
+#   geom_line(aes(y = IM1.mean,  color ="col2"), size=sz2) +
+#   geom_line(aes(y = IM2.mean,  color ="col2"), size=sz2) +
+#   geom_line(aes(y = IM3.mean,  color ="col2"), size=sz2) +
+#   geom_line(aes(y = IH1.mean,  color ="col3"), size=sz2) +
+#   geom_line(aes(y = IH2.mean,  color ="col3"), size=sz2) +
+#   geom_line(aes(y = IH3.mean,  color ="col3"), size=sz2) +
+#   
+#   geom_point(aes(y = IL1.mean, pch = "pch1"),  color =col1, size=sz) +
+#   geom_point(aes(y = IL2.mean, pch = "pch2"),  color =col1, size=sz) +
+#   geom_point(aes(y = IL3.mean, pch = "pch3"),  color =col1, size=sz) +
+#   geom_point(aes(y = IM1.mean, pch = "pch1"),  color =col2, size=sz) +
+#   geom_point(aes(y = IM2.mean, pch = "pch2"),  color =col2, size=sz) +
+#   geom_point(aes(y = IM3.mean, pch = "pch3"),  color =col2, size=sz) +
+#   geom_point(aes(y = IH1.mean, pch = "pch1"),  color =col3, size=sz) +
+#   geom_point(aes(y = IH2.mean, pch = "pch2"),  color =col3, size=sz) +
+#   geom_point(aes(y = IH3.mean, pch = "pch3"),  color =col3, size=sz) +
+#   
+#   geom_errorbar(aes(ymin = IL1.lower, ymax = IL1.upper), width= widtherr ,  color = col1, size=sz3) +
+#   geom_errorbar(aes(ymin = IL2.lower, ymax = IL2.upper), width= widtherr ,  color =col1, size=sz3) +
+#   geom_errorbar(aes(ymin = IL3.lower, ymax = IL3.upper), width= widtherr ,  color =col1, size=sz3) +
+#   geom_errorbar(aes(ymin = IM1.lower, ymax = IM1.upper), width= widtherr ,  color =col2, size=sz3) +
+#   geom_errorbar(aes(ymin = IM2.lower, ymax = IM2.upper), width= widtherr ,  color =col2, size=sz3) +
+#   geom_errorbar(aes(ymin = IM3.lower, ymax = IM3.upper), width= widtherr ,  color =col2, size=sz3) +
+#   geom_errorbar(aes(ymin = IH1.lower, ymax = IH1.upper), width= widtherr ,  color =col3, size=sz3) +
+#   geom_errorbar(aes(ymin = IH2.lower, ymax = IH2.upper), width= widtherr ,  color =col3, size=sz3) +
+#   geom_errorbar(aes(ymin = IH3.lower, ymax = IH3.upper), width= widtherr ,  color =col3,  size=sz3) +
+#   
+#   theme(text=element_text(size=12,  family="serif")) +
+#   labs(fill = "scenario") +
+#   ylab("FNR") +
+#   xlab("Threshold") +
+#   
+#   scale_color_manual(name = "Dispersal",
+#                      values = c("col1" = "cyan", "col2" = "red", "col3" = "black"),
+#                      labels = c("low (L)", "moderate (M)", "high (H)")) +
+#   
+#   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+#         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
+#   
+#   theme(legend.key=element_blank()) +
+#   
+#   scale_shape_manual(name = "Number of pop.",
+#                      values = c("pch1" = 17, "pch2" = 15, "pch3" = 19),
+#                      labels = c("1","2","3"))
+# 
+# ##############################################################################################
 
 ggplot(dfFPR_I, aes(alpha)) + 
   
