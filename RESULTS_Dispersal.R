@@ -1,4 +1,4 @@
-#setwd("E:/Globus/RData2")
+setwd("E:/Globus/RData2")
 
 alpha <- c(0.0001, 0.001, 0.005, 0.01, 0.015, 0.020, 0.025, 0.030, 0.035, 0.040, 0.045,
            0.050, 0.055, 0.060, 0.065, 0.070, 0.075, 0.080, 0.085, 0.090, 0.095, 0.1)
@@ -132,7 +132,7 @@ ggplot(dfFNR_I, aes(alpha)) +
   xlab("Threshold") +
 
   scale_color_manual(name = "Dispersal",
-                     values = c("col1" = "cyan", "col2" = "red", "col3" = "black"),
+                     values = c("col1" = "lightblue2", "col2" = "dodgerblue", "col3" = "blue4"),
                      labels = c("low (L)", "moderate (M)", "high (H)")) +
   
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
@@ -246,7 +246,7 @@ ggplot(dfFPR_I, aes(alpha)) +
   xlab("Threshold") +
   
   scale_color_manual(name = "Dispersal",
-                     values = c("col1" = "cyan", "col2" = "red", "col3" = "black"),
+                     values = c("col1" = "lightblue2", "col2" = "dodgerblue", "col3" = "blue4"),
                      labels = c("low (L)", "moderate (M)", "high (H)")) +
   
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),

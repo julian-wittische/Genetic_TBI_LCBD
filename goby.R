@@ -1,4 +1,3 @@
-setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
 
 genepop.to.genind <- function(name, quiet = TRUE, ncode = 3) {
   if (requireNamespace("adegenet")) {
