@@ -2,8 +2,8 @@
 # Author: Julian Wittische 
 # July 2020
 
-setwd("C:/Users/jwitt/OneDrive/Documents/TBI_files/TGI_anal_files2")
-
+#setwd("C:/Users/jwitt/OneDrive/Documents/TBI_files/TGI_anal_files2")
+setwd("E:/Globus/FINAL_DATA")
 #
 IL1 <- load_perf(load_RData("I_L1_m_new3.RData"), 1)
 IL1b1 <- load_perf(load_RData("I_L1_m_new3_pre1.RData"), 1)

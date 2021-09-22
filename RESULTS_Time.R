@@ -1,6 +1,6 @@
 # setwd("E:/Globus/RData2")
 # setwd("C:/Users/Field/Documents/Glob")
-
+setwd("E:/Globus/FINAL_DATA")
 library(Rmisc)
 
 alpha <- c(0.0001, 0.001, 0.005, 0.01, 0.015, 0.020, 0.025, 0.030, 0.035, 0.040, 0.045,
