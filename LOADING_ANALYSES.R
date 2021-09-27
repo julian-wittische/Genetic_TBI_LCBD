@@ -3,6 +3,7 @@
 # July 2020
 
 setwd("C:/Users/jwitt/OneDrive/Documents/TBI_files/TGI_anal_files2")
+setwd("C:/Users/jwitt/OneDrive/Desktop/Git_projects/FINAL_DATA")
 
 #
 IL1 <- load_perf(load_RData("I_L1_m_new3.RData"), 1)
