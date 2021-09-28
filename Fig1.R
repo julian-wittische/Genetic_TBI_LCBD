@@ -63,7 +63,7 @@ p +
         legend.key = element_rect(fill = NA)) +
     scale_x_continuous(limits = c(0, sqrt(4^2+4^2)), breaks=c(0,1,2,3,4,5)) +
   scale_color_manual(name = "Dispersal",
-                     values = c("fun.1" = "cyan", "fun.2" = "red", "fun.3" = "black"),
+                     values = c("fun.1" = "lightblue3", "fun.2" = "dodgerblue", "fun.3" = "blue4"),
                      labels = c("low (L)", "moderate (M)", "high (H)")) +
   #geom_vline(xintercept = 1, linetype = "dashed") +
   ylab("Probability of dispersal") +
