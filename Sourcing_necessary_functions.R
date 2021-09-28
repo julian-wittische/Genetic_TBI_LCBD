@@ -1,8 +1,8 @@
 # Sourcing functions and loading packages
 # Julian Wittische 
 # July 2020
-
-setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
+#setwd("C:/Users/jwitt/OneDrive/Desktop/Git_Projects/Genetic_TBI_LCBD")
+setwd("C:/Users/Utilisateur/Desktop/Projects/Genetic_TBI_LCBD")
 
 # Source script to install and load necessary packages
 source("Installing_missing_packages.R")
