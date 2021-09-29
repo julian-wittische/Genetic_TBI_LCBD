@@ -5,8 +5,5 @@ Test10/
 ~$Results.xlsx
 ~$netic_TBI_Draft3.docx
 ~$netic_TBI_Draft_2.docx
-.tmp
 ~$used_intro.docx
-~WRL1721.tmp
-~WRL0065.tmp
-~WRL2343.tmp
+*.tmp
