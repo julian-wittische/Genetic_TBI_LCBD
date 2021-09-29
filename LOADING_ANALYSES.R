@@ -4,7 +4,7 @@
 
 
 #setwd("C:/Users/jwitt/OneDrive/Documents/TBI_files/TGI_anal_files2")
-#setwd("E:/Globus/FINAL_DATA")
+setwd("E:/Globus/FINAL_DATA")
 #setwd("C:/Users/jwitt/OneDrive/Desktop/Git_projects/FINAL_DATA")
 
 #

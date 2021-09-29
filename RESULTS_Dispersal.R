@@ -133,7 +133,7 @@ ggplot(dfFNR_I, aes(alpha)) +
   xlab("Threshold") +
 
   scale_color_manual(name = "Dispersal",
-                     values = c("col1" = "lightblue2", "col2" = "dodgerblue", "col3" = "blue4"),
+                     values = c("col1" = "lightblue3", "col2" = "dodgerblue2", "col3" = "blue4"),
                      labels = c("low (L)", "moderate (M)", "high (H)")) +
   
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
@@ -247,7 +247,7 @@ ggplot(dfFPR_I, aes(alpha)) +
   xlab("Threshold") +
   
   scale_color_manual(name = "Dispersal",
-                     values = c("col1" = "lightblue2", "col2" = "dodgerblue", "col3" = "blue4"),
+                     values = c("col1" = "lightblue3", "col2" = "dodgerblue2", "col3" = "blue4"),
                      labels = c("low (L)", "moderate (M)", "high (H)")) +
   
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
