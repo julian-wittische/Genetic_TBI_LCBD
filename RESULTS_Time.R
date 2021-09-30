@@ -58,9 +58,9 @@ sz <- 3
 sz2 <- 1
 sz3 <-0.5
 widtherr <- 0.25
-col1 <- "cyan"
-col2 <- "red"
-col3 <- "black"
+col1 <- "lightblue3"
+col2 <- "dodgerblue2"
+col3 <- "blue4"
 
 ##############################################################################################
 
@@ -102,7 +102,7 @@ ggplot(dfFNR_I_time, aes(years)) +
   xlab("Time lag relative to the sampling closest to the event (generations)") +
   
   scale_color_manual(name = "Dispersal",
-                     values = c("col1" = "cyan", "col2" = "red", "col3" = "black"),
+                     values = c("col1" = "lightblue3", "col2" = "dodgerblue2", "col3" = "blue4"),
                      labels = c("low (L)", "moderate (M)", "high (H)")) +
   
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
@@ -154,7 +154,7 @@ ggplot(dfFPR_I_time, aes(years)) +
   xlab("Time lag relative to the sampling closest to the event (generations)") +
   
   scale_color_manual(name = "Dispersal",
-                     values = c("col1" = "cyan", "col2" = "red", "col3" = "black"),
+                     values = c("col1" = "lightblue3", "col2" = "dodgerblue2", "col3" = "blue4"),
                      labels = c("low (L)", "moderate (M)", "high (H)")) +
   
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),

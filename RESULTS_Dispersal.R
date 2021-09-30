@@ -86,9 +86,9 @@ sz <- 3
 sz2 <- 1
 sz3 <-0.5
 widtherr <- 0.001
-col1 <- "cyan"
-col2 <- "red"
-col3 <- "black"
+col1 <- "lightblue3"
+col2 <- "dodgerblue2"
+col3 <- "blue4"
 
 # dfFNR_melt <- melt(dfFNR ,  id.vars = 'alpha', variable.name = 'scenario')
 # dfFNR_melt_cb <- cbind(dfFNR_melt, disp=rep("L","M","H", each = 27), pops=rep)
