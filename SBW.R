@@ -1,7 +1,7 @@
 # SBW
 # Data from Jeremy Larroque
 
-load("SBW_1213_JW.RData")
+load("Data/SBW_1213_JW.RData")
 
 sbw2012_genind <- dat3[dat3@other$year==2012]
 sbw2013_genind <- dat3[dat3@other$year==2013]
