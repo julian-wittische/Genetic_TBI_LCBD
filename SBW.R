@@ -19,7 +19,7 @@ sbw2013_genpop@tab  <- sbw2013_genpop@tab[order(row.names(sbw2013_genpop@tab)),]
 rownames(sbw2012_genpop@tab)
 rownames(sbw2013_genpop@tab)
 
-SBW_results <- TBIgenJW_test(sbw2012_genpop, sbw2013_genpop, nperm = 999)
+SBW_results <- TBIgenJW_test(sbw2012_genpop, sbw2013_genpop, nperm = 9999)
 SBW_results
 
 # sep12 <- seppop(sbw2012_genind) 
