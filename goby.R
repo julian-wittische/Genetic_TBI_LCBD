@@ -12,7 +12,7 @@ genepop.to.genind <- function(name, quiet = TRUE, ncode = 3) {
   }
 }
 
-goby <- genepop.to.genind("GobyCombined.genepop2.txt")
+goby <- genepop.to.genind("Data/GobyCombined.genepop2.txt")
 
 table(goby@pop)
 
