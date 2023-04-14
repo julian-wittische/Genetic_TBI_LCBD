@@ -6,7 +6,7 @@ bal <- as.data.frame(read_excel("Data/Input genalex IMP_cleaned.xlsx", sheet="Sh
 bal[bal==0] <- NA
 
 bal$A2[bal$A2==306] <- NA
-bal[bal$A2.2==306] <- NA
+bal$A2.2[bal$A2.2==306] <- NA
 bal$A2[bal$A2==334] <- NA
 bal$A2.2[bal$A2.2==334] <- NA
 bal$A21[bal$A21==350] <- NA
@@ -43,7 +43,12 @@ for (i in 1:9){
 }
 colnames(bal_genind_temp) <- colnames(bal_genind_2011)[seq(1,18,2)]
 bal_genind_2011 <- bal_genind_temp
-bal_genind_2011$A2
+
+bal_genind_2011$A21[grepl("NA", bal_genind_2011$A21)] <- "NA_NA"
+bal_genind_2011$R101[grepl("NA", bal_genind_2011$R101)] <- "NA_NA"
+bal_genind_2011$R210[grepl("NA", bal_genind_2011$R210)] <- "NA_NA"
+bal_genind_2011$R213[grepl("NA", bal_genind_2011$R213)] <- "NA_NA"
+bal_genind_2011$R240[grepl("NA", bal_genind_2011$R240)] <- "NA_NA"
 
 bal_genind_2011 <- df2genind(bal_genind_2011,sep="_",NA.char="NA_NA",
                              ind.names=bal2011$sample, ncode=3,
@@ -59,9 +64,11 @@ for (i in 1:9){
 colnames(bal_genind_temp2) <- colnames(bal_genind_2017)[seq(1,18,2)]
 bal_genind_2017 <- bal_genind_temp2
 
+bal_genind_2017$A2[grepl("NA", bal_genind_2017$A2)] <- "NA_NA"
+
 bal_genind_2017 <- df2genind(bal_genind_2017,sep="_",NA.char="NA_NA",
                              ind.names=bal2017$sample, ncode=3,
                              pop=bal2017$pop, ploidy=2, type="codom")
 
-TGI2(bal_genind_2011, bal_genind_2017, nperm=99)
+TGI2(bal_genind_2011, bal_genind_2017, nperm=9999)
 
