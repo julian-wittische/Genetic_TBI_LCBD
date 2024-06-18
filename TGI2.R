@@ -1,3 +1,25 @@
+# mat1: the genotypic matrix associated with the first sampling; must be a genind object
+# mat2: the genotypic matrix associated with the second sampling; must be a genind object
+# nperm: the the number of permutations used in the evaluation of significance
+# seed.: you may specify a seed by using this argument
+
+# method : a number between 1 and 5. Five genetic distances are available in function dist.genpop # of the adegenet package. 
+# They are : (1) Nei’s D, (2) Edwards’ angular D, (3) Reynolds’ coancestry coefficient, (4) 
+# Rogers’ D, (5) Prevosti’s absolute genetic D. Methods 2, 3 and 4 produce Euclidean distances, 
+# whereas methods 1 and 5 produce non-Euclidean distances, which produce negative eigenvalues and # complex eigenvectors
+# in principal coordinate analysis.
+
+# Users must be aware than different distance or differentiation metrics have different properties (Legendre and Legendre 2012)
+# and that using different genetic distance metrics may affect the outcome of population genetics analyses.
+# Read Balkenhol et al 2009, Shirk et al 2017, and Beninde et al 2023 for more information and to choose the genetic distance
+#most appropriate for you. 
+#If you plan to use one metric that is not included in the ones above, you can simply replace the dist.genpop() line in the dissim() function.
+
+# correc: correction for multiple # inference; see ?p.adjust
+# thresh_for_GL: indicate here the threshold you want to use
+
+
+library(adegenet)
 library(poppr)
 
 TGI2 <- function (mat1, mat2, nperm = 999, replace = FALSE, seed. = NULL, method = 4, correc = "holm", thresh_for_GL = 0.05) {
